@@ -1,13 +1,12 @@
 import _ from 'lodash';
 import React from 'react';
-import formatNumber from '../../utils/formatNumber';
 import TableList from './TableList';
-import ExampleApp from './Modal';
 
 const Table = (props) => {
 
 	function renderList() {
 		const { prices, drugs } = props;
+
 		return _.map(drugs, (amount, name) => {
 			const price = prices.filter(price => price.name === name).map(drug => drug.price)[0];
 
@@ -15,8 +14,9 @@ const Table = (props) => {
 				<TableList
 					key={name}
 					name={name}
-					price={formatNumber(price)}
-					amount={amount}/>
+					price={price}
+					amount={amount}
+					buySell={props.buySell}/>
 			);
 		});
 	}
@@ -41,7 +41,6 @@ const Table = (props) => {
 		        </div>
 			</div>
 		</div>
-
 	)
 }
 export default Table

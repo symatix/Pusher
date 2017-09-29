@@ -12,7 +12,7 @@ export default function (state = {}, action) {
 				price: generatePrice(min, max)
 			}
 		})
-		return prices || false
+		return prices
 
 	default:
 		return state

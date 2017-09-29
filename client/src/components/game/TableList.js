@@ -1,24 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { buySell } from '../../actions';
+import React from 'react';
+import formatNumber from '../../utils/formatNumber';
 
-class TableList extends Component {
+const TableList = (props) => {
+	const { name, price, amount, buySell } = props;
 
-	handleClick(drug) {
-		this.props.buySell(drug)
-	}
-
-	render() {
-		const { name, price, amount } = this.props;
-		const drug = { name, price }
-		return (
-			<tr onClick={() => this.handleClick(drug)}>
-                <td>{name}</td>
-                <td>{price}</td>
-                <td>{amount}</td>
-			</tr>
-		)
-	}
+	return (
+		<tr onClick={() => buySell({name, price})}>
+            <td>{name}</td>
+            <td>{formatNumber(price)}</td>
+            <td>{amount}</td>
+		</tr>
+	)
 };
 
-export default connect(null, { buySell })(TableList);
+export default TableList;

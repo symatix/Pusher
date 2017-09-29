@@ -1,4 +1,5 @@
-import { INIT_STATE } from '../actions/types'
+import _ from 'lodash';
+import { INIT_STATE, MOVE_CITY } from '../actions/types'
 
 export default function (state = {}, action) {
 
@@ -6,6 +7,9 @@ export default function (state = {}, action) {
 
 	case INIT_STATE:
 		return action.payload || false
+
+	case MOVE_CITY:
+		return _.merge({}, state, action.payload);
 
 	default:
 		return state

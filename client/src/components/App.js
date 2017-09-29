@@ -13,7 +13,6 @@ class App extends Component {
                         <Route exact path="/" component={Login} />
                         <Route exact path="/push" component={Game} />
                     </div>
-
                 </BrowserRouter>
             </div>
 		)

@@ -8,9 +8,19 @@ export const fetchUser = () => async dispatch => {
 	dispatch({ type: TYPE.FETCH_USER, payload: res.data });
 };
 
+export const getCityList = () => async dispatch => {
+	const cityList = await axios.get("/api/citylist")
+	dispatch({ type: TYPE.GET_CITY_LIST, payload: cityList.data })
+}
+
 export const getPrices = (city) => async dispatch => {
 	const res = await axios.post("/api/prices", city)
 	dispatch({ type: TYPE.GET_PRICES, payload: res.data.prices })
+}
+
+export const getCity = (city) => async dispatch => {
+	const res = await axios.post("/api/move", city);
+	dispatch({ type: TYPE.MOVE_CITY, payload: res.data })
 }
 export const buySell = (drug) => {
 	return { type: TYPE.BUY_SELL, payload: drug }

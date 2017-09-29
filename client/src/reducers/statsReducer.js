@@ -9,10 +9,7 @@ export default function (state = {}, action) {
 		return action.payload || false
 
 	case UPDATE_STASH:
-		const newStats = action.payload;
-		console.log(newStats)
 		return _.merge({}, state, action.payload);
-
 
 	default:
 		return state

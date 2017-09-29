@@ -3,7 +3,8 @@ import React from 'react'
 const Login = () => {
 	return (
 		<div>
-            <a href="/auth/google">Login</a>
+			<h2>Become a pusher</h2>
+            <a href="/auth/google">Sign up</a>
         </div>
 	)
 }
