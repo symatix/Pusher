@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateStash } from '../actions';
-import formatNumber from '../utils/formatNumber'
-import decideAction from '../utils/decideAction'
-import calculateAction from '../utils/calculateAction'
-import InputRange from './InputRange';
+import { updateStash } from '../../actions';
+import formatNumber from '../../utils/formatNumber'
+import decideAction from '../../utils/decideAction'
+import calculateAction from '../../utils/calculateAction'
+import InputRange from '../InputRange';
 
 class Actions extends Component {
 	constructor(props) {
@@ -43,9 +43,7 @@ class Actions extends Component {
 			const { stash, cash, pockets } = this.props;
 			const { name, price } = this.props.drug;
 			const { input } = this.state;
-			const fork = { stash, cash, pockets, name, price, input };
-			const childProps = decideAction(fork);
-
+			const childProps = decideAction({ stash, cash, pockets, name, price, input });
 			if ((childProps.max > 0 && price * this.state.input <= this.props.cash) || stash[name] > 0) {
 				return (
 					<InputRange
@@ -56,7 +54,7 @@ class Actions extends Component {
 					/>
 				)
 			}
-			if (childProps.max === 0) {
+			if (childProps.pocketsRemaining === 0) {
 				return (<div className="alert alert-warning">Bro, ur pockets r full...</div>)
 			} else {
 				return (<div className="alert alert-danger">Bro, u broke...</div>)
@@ -70,7 +68,7 @@ class Actions extends Component {
 			const { name, price } = this.props.drug;
 			return (
 				<div>
-					There is some <strong>{name}</strong> on the market for <strong>${formatNumber(price)}</strong>!<br/>
+					There is some <strong>{name}</strong> on the market for <strong>{formatNumber(price)}</strong>!<br/>
 	            </div>
 			)
 		}

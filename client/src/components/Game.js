@@ -5,8 +5,9 @@ import Table from './game/Table';
 import Dashboard from './Dashboard';
 
 class Game extends Component {
-	componentDidMount() {
+	componentWillMount() {
 		const { name } = this.props.city;
+		this.props.getCity(name)
 		this.props.getCityList();
 		this.props.getPrices({ name });
 		this.props.fetchUser();
@@ -26,12 +27,14 @@ class Game extends Component {
 					<div className="col-xs-4">
 						<Dashboard
 							stats={this.props.stats}
-							city={this.props.city.name}
+							city={this.props.city}
 							user={this.props.auth}
 							cash={this.props.stats.money.cash}
 							drug={this.props.drug}
 							getPrices={this.props.getPrices}
 							getCity={this.props.getCity}
+							buySell={this.props.buySell}
+							updateDept={this.props.updateDept}
 							cityList={this.props.cities}
 						/>
 					</div>

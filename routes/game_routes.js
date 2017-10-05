@@ -10,18 +10,15 @@ module.exports = (app) => {
 
 	app.get('/api/citylist', async(req, res) => {
 		const cityList = await Cities.find({}, { name: 1, _id: false });
-		console.log(cityList)
 		res.send(cityList)
 	});
 
 	app.post('/api/move', async(req, res) => {
 		const newState = await Cities.findOne(req.body, { prices: false, _id: false })
-		console.log(newState)
 		res.send(newState)
 	})
 
 	app.post('/api/prices', async(req, res) => {
-		console.log(req.body)
 		const city = await Cities.findOne(req.body, 'prices');
 
 		res.send(city);

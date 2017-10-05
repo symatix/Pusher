@@ -1,63 +1,88 @@
-import React from 'react';
-import Actions from './Actions'
-import Progress from 'react-progressbar';
-import formatNumber from '../utils/formatNumber'
+import React, { Component } from 'react';
+import Actions from './dashboard/Actions'
+import CityActions from './dashboard/CityActions';
+import Stats from './dashboard/Stats';
 
-
-const Dashboard = (props) => {
-
-	function renderAction() {
-		if (props.drug) {
+class Dashboard extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { cityAction: '' }
+		this.handleCityBtn = this.handleCityBtn.bind(this);
+	}
+	renderAction() {
+		if (this.props.drug) {
 			return (
-				<div className="panel panel-default">
-					<div className="panel-body">
-						<Actions cash={props.cash} drug={props.drug} stash={props.stats.drugs} pockets={props.stats.assets.pockets}/>
-					</div>
+				<Actions
+					cash={this.props.cash}
+					drug={this.props.drug}
+					stash={this.props.stats.drugs}
+					pockets={this.props.stats.assets.pockets}/>
+			)
+		}
+		if (this.state.cityAction) {
+			return (
+				<div>
+					<CityActions
+						cityAction={this.state.cityAction}
+						money={this.props.stats.money}
+						health={this.props.stats.health}
+					/>
 				</div>
 			)
 		}
+		return (<p>What u wanna do here?</p>)
 	}
 
-	function changeLocation(city) {
-		props.getCity(city);
-		props.getPrices(city);
+	handleCityBtn(e) {
+		this.setState({ cityAction: e.target.textContent })
+		this.props.buySell(null);
 	}
 
-	function renderLocations() {
-		return props.cityList.map(({ name }, index) => {
+	changeLocation(city, money) {
+		if (city !== this.props.city.name) {
+			this.setState({ cityAction: '' })
+			this.props.updateDept(money);
+			this.props.getCity(city);
+			this.props.getPrices(city);
+			this.props.buySell(null);
+		}
+	}
+
+	renderLocations() {
+		const { money } = this.props.stats;
+		return this.props.cityList.map(({ name }, index) => {
 			return (
 				<button
-					key={name+index} onClick={()=> changeLocation({name})}
-					className={name === props.city ? "btn btn-info" : "btn btn-default"}>
+					key={name+index}
+					onClick={()=> this.changeLocation(name, money)}
+					className={name === this.props.city.name ? "btn btn-info" : "btn btn-default"}>
 					{name}
 				</button>
 			)
 		})
 	}
-
-	return (
-		<div>
-		<div className="panel panel-default">
-            <div className="panel-body">
-               <dl className="dl-horizontal">
-                   <dt>Pusher</dt><dd>{props.user ? props.user.name : "Hacker"}</dd>
-                   <dt>Health</dt><dd><Progress completed={props.stats.health} /></dd>
-                   <dt>City</dt><dd>{props.city}</dd>
-				   <dt>Cash</dt><dd>${formatNumber(props.stats.money.cash)}</dd>
-                   <dt>Stash</dt><dd>{props.stats.assets.pockets.current} / {props.stats.assets.pockets.total}</dd>
-                   <dt>Deposit</dt><dd>{props.stats.money.bankDeposit}</dd>
-                   <dt>Bank dept</dt><dd>{props.stats.money.bankDept}</dd>
-                   <dt>Loaner shark</dt><dd>{props.stats.money.loanerDept}</dd>
-              </dl>
-            </div>
-        </div>
-		<div className="panel panel-default">
-			<div className="panel-body btn-group">
-				{renderLocations()}
+	render() {
+		return (
+			<div>
+				<Stats
+					{...this.props.stats}
+					city={this.props.city}
+					user={this.props.user}
+					handleCityBtn={this.handleCityBtn}
+				 />
+				<div className="panel panel-default">
+					<div className="panel-body btn-group">
+						{this.renderLocations()}
+					</div>
+				</div>
+				<div className="panel panel-default">
+					<div className="panel-body">
+						{this.renderAction()}
+					</div>
+				</div>
 			</div>
-		</div>
-		{renderAction()}
-	</div>
-	)
+		)
+	}
+
 }
 export default Dashboard;

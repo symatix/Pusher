@@ -14,7 +14,7 @@ const initState = {
 			pills: 0
 		},
 		money: {
-			loanerDept: 0,
+			loanerDept: 5000,
 			bankDept: 0,
 			bankDeposit: 0,
 			cash: 2000

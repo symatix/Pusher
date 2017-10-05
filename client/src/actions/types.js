@@ -5,3 +5,5 @@ export const GET_PRICES = 'GET_PRICES';
 export const BUY_SELL = 'BUY_SELL';
 export const UPDATE_STASH = 'UPDATE_STASH';
 export const MOVE_CITY = 'MOVE_CITY';
+export const UPDATE_DEPT = 'UPDATE_DEPT';
+export const PAY_LOANER = 'PAY_LOANER';

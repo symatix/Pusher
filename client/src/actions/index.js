@@ -19,12 +19,23 @@ export const getPrices = (city) => async dispatch => {
 }
 
 export const getCity = (city) => async dispatch => {
-	const res = await axios.post("/api/move", city);
+	const res = await axios.post("/api/move", { name: city });
 	dispatch({ type: TYPE.MOVE_CITY, payload: res.data })
 }
+export const updateDept = (money) => {
+	money.loanerDept = Math.floor(money.loanerDept * 1.1);
+	money.bankDept = Math.floor(money.bankDept * 1.03);
+	return { type: TYPE.UPDATE_DEPT, payload: money }
+}
+
 export const buySell = (drug) => {
 	return { type: TYPE.BUY_SELL, payload: drug }
 }
 export const updateStash = (newStash) => {
 	return { type: TYPE.UPDATE_STASH, payload: newStash }
+}
+
+export const cityTransfers = (newMoney) => {
+	console.log(newMoney)
+	return { type: TYPE.PAY_LOANER, payload: { money: newMoney } }
 }
