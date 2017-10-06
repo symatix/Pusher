@@ -1,16 +1,18 @@
 import { combineReducers } from 'redux'
 import authReducer from './authReducer'
-import statsReducer from './statsReducer'
-import cityReducer from './cityReducer'
-import priceReducer from './priceReducer'
-import drugReducer from './drugReducer'
+import activeDrugReducer from './activeDrugReducer'
+import activeCityReducer from './activeCityReducer'
+import pusherReducer from './pusherReducer'
+import moneyReducer from './moneyReducer'
 import citiesReducer from './citiesReducer'
+import drugsReducer from './drugsReducer'
 
 export default combineReducers({
 	auth: authReducer,
+	activeDrug: activeDrugReducer,
+	activeCity: activeCityReducer,
+	pusher: pusherReducer,
+	money: moneyReducer,
 	cities: citiesReducer,
-	stats: statsReducer,
-	city: cityReducer,
-	prices: priceReducer,
-	drug: drugReducer
+	drugs: drugsReducer
 });

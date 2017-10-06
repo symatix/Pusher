@@ -11,18 +11,26 @@
     }
   },
   "dependencies": {
+    "@graphistry/rc-slider": "^8.3.3",
     "axios": "^0.16.2",
     "bootstrap": "^3.3.7",
     "lodash": "^4.17.4",
+    "material-ui": "^1.0.0-beta.13",
+    "material-ui-icons": "^1.0.0-beta.15",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-flexgrid": "^1.0.0",
     "react-modal": "^2.3.2",
     "react-progressbar": "^15.4.1",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
+    "react-swipeable-views": "^0.12.8",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-form": "^7.0.4",
+    "redux-form-material-ui": "^4.3.0",
+    "redux-thunk": "^2.2.0",
+    "typeface-roboto": "0.0.35"
   },
   "scripts": {
     "start": "react-scripts start",

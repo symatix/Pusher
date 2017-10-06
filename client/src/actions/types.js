@@ -1,9 +1,3 @@
 export const FETCH_USER = 'FETCH_USER';
-export const GET_CITY_LIST = 'GET_CITY_LIST';
-export const INIT_STATE = 'INIT_STATE';
-export const GET_PRICES = 'GET_PRICES';
-export const BUY_SELL = 'BUY_SELL';
-export const UPDATE_STASH = 'UPDATE_STASH';
-export const MOVE_CITY = 'MOVE_CITY';
-export const UPDATE_DEPT = 'UPDATE_DEPT';
-export const PAY_LOANER = 'PAY_LOANER';
+export const CALCULATE_PRICES = 'CALCULATE_PRICES';
+export const CHANGE_CITY = 'CHANGE_CITY';

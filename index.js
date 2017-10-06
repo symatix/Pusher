@@ -3,7 +3,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
-const keys = require('./config/dev');
+const keys = require('./config/keys');
 // pull in user schema at init boot
 require('./models/users');
 require('./models/cities');

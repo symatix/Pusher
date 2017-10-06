@@ -1,51 +1,25 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../actions'
-import Table from './game/Table';
-import Dashboard from './Dashboard';
+import { Grid, Row, Col } from 'react-flexgrid';
+import Drugs from './Drugs';
+import Console from './Console';
+
 
 class Game extends Component {
-	componentWillMount() {
-		const { name } = this.props.city;
-		this.props.getCity(name)
-		this.props.getCityList();
-		this.props.getPrices({ name });
-		this.props.fetchUser();
-	}
-
 	render() {
 		return (
-			<div>
-				<h1>Pusher</h1>
-				<div className="row">
-					<div className="col-xs-8">
-	                	<Table
-							drugs={this.props.stats.drugs}
-							prices={this.props.prices}
-						 	buySell={this.props.buySell}/>
-					</div>
-					<div className="col-xs-4">
-						<Dashboard
-							stats={this.props.stats}
-							city={this.props.city}
-							user={this.props.auth}
-							cash={this.props.stats.money.cash}
-							drug={this.props.drug}
-							getPrices={this.props.getPrices}
-							getCity={this.props.getCity}
-							buySell={this.props.buySell}
-							updateDept={this.props.updateDept}
-							cityList={this.props.cities}
-						/>
-					</div>
-	        	</div>
-			</div>
+			<Grid>
+				<Row center="sm">
+					<Col xs={12} sm={6}>
+						<Drugs />
+					</Col>
+
+					<Col xs={12} sm={4}>
+						<Console />
+					</Col>
+				</Row>
+            </Grid>
 		)
 	}
 }
 
-function mapStateToProps(state) {
-	return state;
-}
-
-export default connect(mapStateToProps, actions)(Game)
+export default Game;
