@@ -7,7 +7,8 @@ import Button from 'material-ui/Button';
 import StatList from './StatList';
 import TravelDialog from '../dialogs/TravelDialog';
 import RangeDialog from '../dialogs/RangeDialog';
-import { changeActiveCity } from '../../actions';
+import * as actions from '../../actions';
+import { formatPrice } from '../../utils/formatPrice';
 
 const styles = {
 	card: {
@@ -32,21 +33,20 @@ const styles = {
 class StatCard extends Component {
 	state = {
 		travel: false,
-		action: false,
-		travelValue: this.props.cities[0].name
+		loaner: false,
+		travelValue: this.props.cities[0].name,
+		activeDialog: {
+			open: false,
+			onRequestClose: null
+		}
 	}
-
+	// oh boy, here we go, gonna define all actions and pass them down to list elements for click trigger
+	// takes care of travel
 	handleTravelOpen = () => {
 		this.setState({
 			travel: true,
 		});
 	};
-	handleActionOpen = () => {
-		this.setState({
-			action: true,
-		});
-	};
-
 	handleTravelClose = city => {
 		if (!city || city.name === this.state.travelValue) {
 			this.setState({ travel: false })
@@ -56,16 +56,41 @@ class StatCard extends Component {
 		this.setState({ travelValue: city.name, travel: false });
 		return;
 	};
-
-	handleActionClose = amount => {
+	handleLoanerOpen = () => {
+		console.log("open")
+		this.setState({
+			loaner: true,
+		});
+	};
+	handleLoanerClose = amount => {
 		if (!amount) {
-			this.setState({ action: false })
+			this.setState({ activeDialog: { open: false } })
 			return;
 		}
-		console.log(amount)
-		this.setState({ action: false });
+		const dept = {
+			loaner: this.props.money.loaner - amount,
+			cash: this.props.money.cash - amount
+		}
+		this.props.payLoaner(dept);
+		this.setState({ activeDialog: { open: false } });
 		return;
 	};
+
+
+
+
+	handleDialog(action) {
+		if (action === 'moneyLoaner') {
+			this.setState({
+				activeDialog: {
+					open: true,
+					onRequestClose: this.handleLoanerClose,
+					max: this.props.money.loaner < this.props.money.cash ? this.props.money.loaner : this.props.money.cash,
+					min: 0
+				}
+			})
+		}
+	}
 
 	render() {
 		const { classes, stats, actions } = this.props;
@@ -75,8 +100,10 @@ class StatCard extends Component {
             <Card className={classes.card}>
                 <CardContent>
 					{this.props.cityName ? <StatList primary={this.props.cityName} secondary="CITY"/>: ""}
-                    {stats.map(({data, label}) => {
-                      return <StatList key={label} primary={data} secondary={label} />
+                    {stats.map(({data, label, action}) => {
+						return <StatList key={label} primary={data} secondary={label} action={()=>this.handleDialog(action)} />
+
+
                     })}
 
                 </CardContent>
@@ -104,10 +131,11 @@ class StatCard extends Component {
 				active={this.props.activeCity.name}
             />
             <RangeDialog
-                open={this.state.action}
-                onRequestClose={this.handleActionClose}
-                range={{min:0,max:100}}
-				title="Pay the loaner shark"
+                open={this.state.activeDialog.open}
+                onRequestClose={this.state.activeDialog.onRequestClose}
+				min={this.state.activeDialog.min}
+                max={this.state.activeDialog.max}
+				title="PAY UP! Buoii.."
             />
         </div>
 		);
@@ -122,4 +150,4 @@ StatCard.propTypes = {
 	classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, { changeActiveCity })(withStyles(styles)(StatCard));
+export default connect(mapStateToProps, actions)(withStyles(styles)(StatCard));

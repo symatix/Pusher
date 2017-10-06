@@ -6,7 +6,7 @@ import Button from 'material-ui/Button';
 import Chip from 'material-ui/Chip';
 import Slider from '@graphistry/rc-slider';
 import '@graphistry/rc-slider/assets/index.css';
-import { teal } from 'material-ui/colors'
+import { teal } from 'material-ui/colors';
 
 const styles = theme => ({
 	row: {
@@ -41,7 +41,7 @@ class RangeDialog extends React.Component {
 		this.props.onRequestClose(value);
 	};
 	renderValues() {
-		return `${this.state.value} / ${this.props.range.max}`
+		return `${this.state.value} / ${this.props.max}`
 	}
 
 	render() {
@@ -53,8 +53,8 @@ class RangeDialog extends React.Component {
                     <div style={{padding:'5px 15px'}}>
                         <Slider
                             defaultValue={0}
-                            min={this.props.range.min}
-                            max={this.props.range.max}
+                            min={this.props.min}
+                            max={this.props.max}
                             onChange={this.handleChange.bind(this)}
                             railStyle={{backgroundColor:teal[100], height: 10}}
                             trackStyle={{backgroundColor:teal[800], height: 10}}
@@ -75,6 +75,7 @@ class RangeDialog extends React.Component {
                             className={classes.button}
                             action="submit"
                             dense
+							onClick={()=>this.handleConfirm(this.state.value)}
                             color="primary">
                             Confirm
                         </Button>

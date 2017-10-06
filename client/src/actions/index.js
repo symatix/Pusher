@@ -15,3 +15,14 @@ export const calculatePrices = (drugs) => {
 export const changeActiveCity = (city) => {
 	return { type: fn.CHANGE_CITY, payload: city }
 }
+
+export const setActiveDrug = drug => {
+	return { type: fn.SET_ACTIVE_DRUG, payload: drug }
+}
+
+export const drugTransaction = drug => {
+	return { type: fn.HANDLE_DRUG, payload: drug }
+}
+export const payLoaner = dept => {
+	return { type: fn.PAY_AMOUNT, payload: dept }
+}

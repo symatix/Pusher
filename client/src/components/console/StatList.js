@@ -4,7 +4,7 @@ import { ListItem, ListItemText } from 'material-ui/List';
 
 function StatList(props) {
 	return (
-		<ListItem button component="a" href="#">
+		<ListItem onClick={props.action} button component="a" href="#">
           <ListItemText primary={props.primary} secondary={props.secondary} />
         </ListItem>
 	);

@@ -12,6 +12,7 @@ export default {
 		days: 1,
 		health: 100,
 		storage: 100,
+		possession: 0,
 		gun: [0, 0, 0], // damage [min, max]
 		pushers: [0, 0, 0], // income [min, max, pushers]
 		thugs: [0, 0, 0], // damage [min, max, thugs]

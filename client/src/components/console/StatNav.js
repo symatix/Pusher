@@ -23,7 +23,12 @@ const styles = theme => ({
 });
 
 class StatNav extends React.Component {
-	state = { value: 0 };
+	constructor(props) {
+		super(props);
+		this.state = { value: 0 };
+		this.payLoaner = this.payLoaner.bind(this)
+	}
+
 
 	handleChange = (event, value) => {
 		this.setState({ value });
@@ -35,6 +40,9 @@ class StatNav extends React.Component {
 
 	extractCityNames() {
 
+	}
+	payLoaner(amount) {
+		console.log("paying loaner", amount)
 	}
 
 	render() {
@@ -50,8 +58,8 @@ class StatNav extends React.Component {
             fullWidth
           >
             <Tab label="City" />
-            <Tab label="Pusher" />
             <Tab label="Money" />
+            <Tab label="Pusher" />
           </Tabs>
         </AppBar>
         <SwipeableViews index={this.state.value} onChangeIndex={this.handleChangeIndex}>
@@ -60,10 +68,10 @@ class StatNav extends React.Component {
 					cityName={this.props.activeCity.name}
 					cities={this.props.cities}
 				  	stats={[
-						{ data: formatPercentage(this.props.activeCity.priceDrop), label: "LUCKY DROP" },
-						{ data: formatPercentage(this.props.activeCity.raids), label: "RAIDS" },
-						{ data: formatPercentage(this.props.activeCity.gangs), label: "GANGS" },
-						{ data: this.props.activeCity.gangMembers, label: "GANG MEMBERS" }
+						{ data: formatPercentage(this.props.activeCity.priceDrop), label: "LUCKY DROP", action:"infoLucky" },
+						{ data: formatPercentage(this.props.activeCity.raids), label: "RAIDS", action:"infoRaids" },
+						{ data: formatPercentage(this.props.activeCity.gangs), label: "GANGS", action:"infoGangs" },
+						{ data: this.props.activeCity.gangMembers, label: "GANG MEMBERS", action:"infoGangMembers" }
 					]}
 					actions={[
 						{ action: "", label: "travel" },
@@ -71,31 +79,34 @@ class StatNav extends React.Component {
 					]}
 				/>
           </TabContainer>
-          <TabContainer>
-				<StatCard
-					cities={this.props.cities}
-					stats={[
-						{ data: this.props.pusher.days, label: "DAYS ACTIVE" },
-						{ data: this.props.pusher.health, label: "HEALTH" },
-						{ data: this.props.pusher.storage, label: "STORAGE" },
-						{ data: `${this.props.pusher.gun[2]}`, label: "GUNS" },
-						{ data: `THUGS ${this.props.pusher.thugs[2]} | PUSHERS ${this.props.pusher.pushers[2]}`, label: "CREW" },
-					]}
-					actions={[{ action: "", label: "travel" }]}
-				/>
-          </TabContainer>
+
           <TabContainer>
 				<StatCard
 					cities={this.props.cities}
 					stats={[
 						{ data: formatPrice(this.props.money.cash), label: "CASH" },
-						{ data: formatPrice(this.props.money.deposit), label: "DEPOSIT" },
-						{ data: formatPrice(this.props.money.bank), label: "BANK DEPT" },
-						{ data: formatPrice(this.props.money.loaner), label: "LOANER SHARK" }
+						{ data: formatPrice(this.props.money.deposit), label: "DEPOSIT", action:"moneyDeposit" },
+						{ data: formatPrice(this.props.money.bank), label: "BANK DEPT", action:"moneyDept" },
+						{ data: formatPrice(this.props.money.loaner), label: "LOANER SHARK", action:"moneyLoaner" }
 					]}
 					actions={[{ action: "", label: "travel" }]}
 				/>
           </TabContainer>
+
+		  <TabContainer>
+				<StatCard
+					cities={this.props.cities}
+					stats={[
+						{ data: this.props.pusher.days, label: "DAYS ACTIVE" },
+						{ data: this.props.pusher.health, label: "HEALTH", action:"pusherHealth" },
+						{ data: `${this.props.pusher.possession} | ${this.props.pusher.storage}`, label: "POSSESSION | STORAGE", action:"pusherStorage" },
+						{ data: `${this.props.pusher.gun[2]}`, label: "GUNS", action:"pusherGuns" },
+						{ data: `${this.props.pusher.thugs[2]} | ${this.props.pusher.pushers[2]}`, label: "THUGS | PUSHERS", action:"pusherCrew" },
+					]}
+					actions={[{ action: "", label: "travel" }]}
+				/>
+          </TabContainer>
+
         </SwipeableViews>
       </div>
 		);

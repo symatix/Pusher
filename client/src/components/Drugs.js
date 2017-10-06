@@ -4,7 +4,8 @@ import { withStyles } from 'material-ui/styles';
 import { connect } from 'react-redux';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
-import { calculatePrices } from '../actions';
+import DrugDialog from './dialogs/DrugDialog';
+import * as actions from '../actions';
 import formatPrice from '../utils/formatPrice';
 
 const styles = theme => ({
@@ -24,14 +25,29 @@ const styles = theme => ({
 });
 
 class Drugs extends Component {
+	state = { drug: false }
 
 	shouldComponentUpdate(nextProps) {
 		if (nextProps.activeCity.name !== this.props.activeCity.name) {
 			this.props.calculatePrices(nextProps.activeCity.prices)
-			return true;
 		}
-		return false;
+		return true;
 	}
+
+	handleDrugClick(drug) {
+		this.props.setActiveDrug(drug)
+		this.setState({ drug: true })
+	}
+	handleDrugClose(payload) {
+		if (!payload) {
+			this.setState({ drug: false });
+			return;
+		}
+		this.props.drugTransaction(payload)
+		this.setState({ drug: false });
+		return
+	}
+
 	render() {
 		return (
 			<Paper className={this.props.classes.paper}>
@@ -47,8 +63,11 @@ class Drugs extends Component {
 	                  {this.props.drugs.map(({name, price, possession}, index) => {
 	                    return (
 
-	                    <TableRow hover className={this.props.classes.tableRow} key={name+index}>
-
+	                    <TableRow
+							onClick={()=> this.handleDrugClick({name, price, possession})}
+							hover
+							className={this.props.classes.tableRow}
+							key={name+index}>
 	                        <TableCell>{name}</TableCell>
 	                        <TableCell>{formatPrice(price)}</TableCell>
 	                        <TableCell numeric>{possession}</TableCell>
@@ -57,15 +76,22 @@ class Drugs extends Component {
 	                  })}
 	                </TableBody>
 	              </Table>
+				  <DrugDialog
+					  	drug={this.props.activeDrug}
+					  	storage={this.props.pusher.storage}
+						possession={this.props.pusher.possession}
+						cash={this.props.money.cash}
+	                  	open={this.state.drug}
+	                  	onRequestClose={this.handleDrugClose.bind(this)}/>
 			</Paper>
 		)
 	}
 }
 
-function mapStateToProps({ drugs, activeCity }) {
-	return { drugs, activeCity }
+function mapStateToProps({ drugs, activeCity, activeDrug, money, pusher }) {
+	return { drugs, activeCity, activeDrug, money, pusher }
 }
 Drugs.propTypes = {
 	classes: PropTypes.object.isRequired,
 };
-export default connect(mapStateToProps, { calculatePrices })(withStyles(styles)(Drugs));
+export default connect(mapStateToProps, actions)(withStyles(styles)(Drugs));
