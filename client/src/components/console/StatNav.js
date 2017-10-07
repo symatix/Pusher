@@ -25,10 +25,12 @@ const styles = theme => ({
 class StatNav extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { value: 0 };
+		this.state = {}
 		this.payLoaner = this.payLoaner.bind(this)
 	}
-
+	componentDidMount() {
+		this.setState({ value: 0 })
+	}
 
 	handleChange = (event, value) => {
 		this.setState({ value });
@@ -73,10 +75,7 @@ class StatNav extends React.Component {
 						{ data: formatPercentage(this.props.activeCity.gangs), label: "GANGS", action:"infoGangs" },
 						{ data: this.props.activeCity.gangMembers, label: "GANG MEMBERS", action:"infoGangMembers" }
 					]}
-					actions={[
-						{ action: "", label: "travel" },
-						{ action: "", label: "pay loaner" }
-					]}
+
 				/>
           </TabContainer>
 
@@ -84,12 +83,13 @@ class StatNav extends React.Component {
 				<StatCard
 					cities={this.props.cities}
 					stats={[
-						{ data: formatPrice(this.props.money.cash), label: "CASH" },
+						{ data: formatPrice(this.props.money.cash), label: "CASH", action:"infoCash" },
+						{ data: formatPrice(this.props.money.bribe), label: "BRIBE", action:"infoBribe" },
+						{ data: formatPrice(this.props.money.salary), label: "CREW SALARY", action:"infoSalary" },
 						{ data: formatPrice(this.props.money.deposit), label: "DEPOSIT", action:"moneyDeposit" },
 						{ data: formatPrice(this.props.money.bank), label: "BANK DEPT", action:"moneyDept" },
 						{ data: formatPrice(this.props.money.loaner), label: "LOANER SHARK", action:"moneyLoaner" }
 					]}
-					actions={[{ action: "", label: "travel" }]}
 				/>
           </TabContainer>
 
@@ -101,9 +101,9 @@ class StatNav extends React.Component {
 						{ data: this.props.pusher.health, label: "HEALTH", action:"pusherHealth" },
 						{ data: `${this.props.pusher.possession} | ${this.props.pusher.storage}`, label: "POSSESSION | STORAGE", action:"pusherStorage" },
 						{ data: `${this.props.pusher.gun[2]}`, label: "GUNS", action:"pusherGuns" },
+						{ data: `${this.props.pusher.cops}`, label: "COPS", action:"pusherCops" },
 						{ data: `${this.props.pusher.thugs[2]} | ${this.props.pusher.pushers[2]}`, label: "THUGS | PUSHERS", action:"pusherCrew" },
 					]}
-					actions={[{ action: "", label: "travel" }]}
 				/>
           </TabContainer>
 

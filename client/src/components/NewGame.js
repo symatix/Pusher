@@ -11,7 +11,7 @@ class NewGame extends Component {
 		const classes = this.props.classes;
 		return (
 			<Grid item xs={12}>
-				<Paper className={classes.paper}>New Game! dfouafgdshouasdoiagoiafdsoiasdfgoiafsdojiafdsoifadoigfgaiodaogfid</Paper>
+				<Paper className={classes.paper}>New Game!</Paper>
 
 				<a href="/on">
 					<Button raised>

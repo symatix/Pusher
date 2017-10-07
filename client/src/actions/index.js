@@ -23,6 +23,6 @@ export const setActiveDrug = drug => {
 export const drugTransaction = drug => {
 	return { type: fn.HANDLE_DRUG, payload: drug }
 }
-export const payLoaner = dept => {
-	return { type: fn.PAY_AMOUNT, payload: dept }
+export const moneyTransaction = newMoney => {
+	return { type: fn.PAY_AMOUNT, payload: newMoney }
 }

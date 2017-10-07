@@ -6,7 +6,8 @@ import Button from 'material-ui/Button';
 import Chip from 'material-ui/Chip';
 import Slider from '@graphistry/rc-slider';
 import '@graphistry/rc-slider/assets/index.css';
-import { teal } from 'material-ui/colors';
+import formatPrice from '../../utils/formatPrice';
+import { teal, red } from 'material-ui/colors';
 
 const styles = theme => ({
 	row: {
@@ -15,6 +16,9 @@ const styles = theme => ({
 		justifyContent: 'center',
 		width: '100%',
 		marginTop: '1.5em'
+	},
+	dialog: {
+		minWidth: '280px'
 	},
 	chip: {
 		backgroundColor: teal[700],
@@ -27,44 +31,51 @@ const styles = theme => ({
 
 });
 
-class RangeDialog extends React.Component {
-	state = { value: 0 }
-
-	handleChange(value) {
-		this.setState({ value });
+class MoneyDialog extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = { input: 0 }
+		this.handleAfterChange = this.handleAfterChange.bind(this);
+	}
+	handleAfterChange = (input) => {
+		this.setState({ input });
 	}
 	handleRequestClose = () => {
 		this.props.onRequestClose();
+		this.setState({ input: 0 })
 	};
 
-	handleConfirm = value => {
-		this.props.onRequestClose(value);
+	handleConfirm = input => {
+		this.props.onRequestClose(input);
+		this.setState({ input: 0 });
 	};
 	renderValues() {
-		return `${this.state.value} / ${this.props.max}`
+		const max = this.props.max ? this.props.max : 0;
+		if (max) {
+			return `${formatPrice(this.state.input)} / ${formatPrice(max)}`
+		}
+		return 'Nothing to do here..';
 	}
 
 	render() {
-		const { classes, onRequestClose, selectedValue, title, range, ...other } = this.props;
+		const { classes, onRequestClose, title, max, range, ...other } = this.props;
 		return (
 			<Dialog onRequestClose={this.handleRequestClose} {...other}>
-                <DialogTitle>{this.props.title}</DialogTitle>
+                <DialogTitle className={classes.dialog}>{this.props.title}</DialogTitle>
                 <form onSubmit={()=>{this.handleConfirm(this.state.value)}}>
                     <div style={{padding:'5px 15px'}}>
                         <Slider
-                            defaultValue={0}
-                            min={this.props.min}
-                            max={this.props.max}
-                            onChange={this.handleChange.bind(this)}
-                            railStyle={{backgroundColor:teal[100], height: 10}}
-                            trackStyle={{backgroundColor:teal[800], height: 10}}
+                            max={max}
+							onAfterChange={this.handleAfterChange}
+                            railStyle={{backgroundColor:max ? teal[100]: red[900], height: 10}}
+                            trackStyle={{backgroundColor: max? teal[800]: red[900], height: 10}}
                             handleStyle={{
-                              borderColor: teal[800],
+                              borderColor: max? teal[800]: red[900],
                               height: 28,
                               width: 28,
                               marginLeft: -14,
                               marginTop: -9,
-                              backgroundColor: teal[800],
+                              backgroundColor: max? teal[800]: red[900],
                             }}
                         />
                     </div>
@@ -75,7 +86,7 @@ class RangeDialog extends React.Component {
                             className={classes.button}
                             action="submit"
                             dense
-							onClick={()=>this.handleConfirm(this.state.value)}
+							onClick={()=>this.handleConfirm(this.state.input)}
                             color="primary">
                             Confirm
                         </Button>
@@ -87,8 +98,8 @@ class RangeDialog extends React.Component {
 	}
 }
 
-RangeDialog.propTypes = {
+MoneyDialog.propTypes = {
 	onRequestClose: PropTypes.func,
 };
 
-export default withStyles(styles)(RangeDialog);
+export default withStyles(styles)(MoneyDialog);

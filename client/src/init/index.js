@@ -1,8 +1,8 @@
-import City0 from './City0'
-import City1 from './City1'
-import City2 from './City2'
-import City3 from './City3'
-import City4 from './City4'
+import City0 from './cities/City0'
+import City1 from './cities/City1'
+import City2 from './cities/City2'
+import City3 from './cities/City3'
+import City4 from './cities/City4'
 
 export default {
 	auth: null,
@@ -16,12 +16,15 @@ export default {
 		gun: [0, 0, 0], // damage [min, max]
 		pushers: [0, 0, 0], // income [min, max, pushers]
 		thugs: [0, 0, 0], // damage [min, max, thugs]
+		cops: 0, // damage [min, max, thugs]
 	},
 	money: {
 		cash: 2000,
 		loaner: 5000,
-		bank: 0,
-		deposit: 0
+		bank: 15000,
+		deposit: 0,
+		bribe: 0,
+		salary: 0
 	},
 	cities: [
 		City0, City1, City2, City3, City4

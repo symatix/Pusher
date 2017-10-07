@@ -5,6 +5,7 @@ export default function (state = {}, action) {
 	switch (action.type) {
 	case CHANGE_CITY:
 		const dept = {
+			deposit: Math.floor(state.deposit * 1.03),
 			loaner: Math.floor(state.loaner * 1.1),
 			bank: Math.floor(state.bank * 1.05)
 		}
