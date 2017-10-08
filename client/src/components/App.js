@@ -20,13 +20,9 @@ import 'react-flexgrid/lib/flexgrid.css'
 
 const styles = theme => ({
 	root: {
+		width:'100%',
 		flexGrow: 1,
 		marginTop: 30,
-	},
-	paper: {
-		padding: 16,
-		textAlign: 'center',
-		color: theme.palette.text.secondary,
 	},
 	control: {
 		padding: theme.spacing.unit * 2,
@@ -38,8 +34,8 @@ class App extends Component {
 		const classes = this.props.classes;
 		return (
 			<MuiThemeProvider theme={muiTheme}>
-				<div className={classes.root}>
-					<Grid container spacing={8}>
+				<Grid container className={classes.root}>
+					<Grid item xs={12}>
 		                <BrowserRouter>
 							<div>
 		                        <Route exact path="/" component={Login} />
@@ -47,8 +43,8 @@ class App extends Component {
 								<Route exact path="/on" component={Layout} />
 							</div>
 		                </BrowserRouter>
-		            </Grid>
-				</div>
+					</Grid>
+	            </Grid>
 			</MuiThemeProvider>
 		)
 	}
