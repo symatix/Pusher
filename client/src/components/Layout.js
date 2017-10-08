@@ -1,6 +1,5 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
-//import { Grid, Row, Col } from 'react-flexgrid';
 import Options from '../containers/Options';
 import Drugs from '../containers/Drugs';
 import Stats from '../containers/Stats';

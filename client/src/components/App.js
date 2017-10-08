@@ -14,7 +14,6 @@ import NewGame from '../containers/NewGame';
 import Layout from './Layout';
 //typography
 import 'typeface-roboto'
-import 'react-flexgrid/lib/flexgrid.css'
 // NOTE: REMOVE BOOTSTRAP FROM MODULES
 
 
