@@ -16,7 +16,7 @@ const InfoDialog = (props) => {
 			</DialogContent>
 			<DialogActions>
 				<Button onClick={() => props.action(null)} color="primary">
-					Close
+					Okay
 				</Button>
 			</DialogActions>
 		</Dialog>

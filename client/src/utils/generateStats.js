@@ -4,9 +4,9 @@ import createNavDialog from './createNavDialog';
 export default (stats) => {
 	// extract all variables and format them for appropriate display
 	const { actions } = stats;
-	let { name, priceDrop, raids, cityCops, gangs, gangMembers } = stats.activeCity;
+	let { name, priceDrop, raids, cityCops, gangs, gangMembers, ownedCops, ownedThugs } = stats.activeCity;
 	let { cash, bribe, salary, deposit, bank, loaner } = stats.money;
-	let { days, health, possession, storage, pushers, gun, thugs, payrollCops } = stats.pusher;
+	let { days, health, possession, storage, gun, payrollCops } = stats.pusher;
 
 	priceDrop = formatPercentage(priceDrop);
 	raids = formatPercentage(raids);
@@ -19,13 +19,10 @@ export default (stats) => {
 	bank = formatPrice(stats.money.bank);
 	loaner = formatPrice(stats.money.loaner);
 
-	thugs = thugs[2];
-	pushers = pushers[2];
-
 	const forNavDialog = {
 		city: { priceDrop, raids, cityCops, gangs, gangMembers },
 		money: { cash, bribe, salary, deposit, bank, loaner },
-		pusher: { days, health, possession, storage, payrollCops, thugs, pushers }
+		pusher: { days, health, possession, storage, payrollCops, ownedCops, ownedThugs }
 	}
 
 	// geenerate all text needed for dialog components
@@ -52,11 +49,11 @@ export default (stats) => {
         ],
 		pusher: [
 			{ type: "info", data: days, label: "DAYS ACTIVE", action: actions.info, text: pusher.days },
-			{ type: "hospital", data: health, label: "HEALTH", action: actions.transfer, text: "hospital" },
-			{ type: "transaction", data: `${possession} | ${storage}`, label: "POSSESSION | STORAGE", action: actions.transfer, text: "storage" },
-			{ type: "transaction", data: `${gun[2]}`, label: "GUNS", action: actions.transfer, text: "guns" },
-			{ type: "people", data: `${payrollCops}`, label: "COPS", action: actions.transfer, text: "cops" },
-			{ type: "people", data: `${thugs} | ${pushers}`, label: "THUGS | PUSHERS", action: actions.transfer, text: "thugs" },
+			{ type: "hospital", data: `${health} | 100`, label: "HEALTH", action: "", text: "hospital" },
+			{ type: "transaction", data: `${possession} | ${storage}`, label: "POSSESSION | STORAGE", action: "", text: "storage" },
+			{ type: "transaction", data: `${gun[2]}`, label: "GUNS", action: "", text: "guns" },
+			{ type: "people", data: `${ownedCops}`, label: "COPS", action: "", text: "cops" },
+			{ type: "people", data: `${ownedThugs}`, label: "THUGS", action: "", text: "thugs" },
         ]
 	}
 }

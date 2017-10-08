@@ -72,14 +72,10 @@ class Stats extends Component {
 			this.setState({
 				transferData: {
 					title: decision[0].toUpperCase() + decision.substring(1),
-					firstMax: bank > cash
-						? cash
-						: bank,
+					firstMax: bank > cash ? cash : bank,
 					secondMax: 100000,
 					total: bank,
-					btnText: [
-						"Pay", "Borrow"
-					],
+					btnText: ["Pay", "Borrow"],
 					cash: this.props.cash,
 					action: this.handleTransaction
 				},
@@ -93,7 +89,8 @@ class Stats extends Component {
 					firstMax: cash,
 					secondMax: deposit,
 					total: cash,
-					btnText: ["Deposit", "Withdraw"]
+					btnText: ["Deposit", "Withdraw"],
+					action: this.handleTransaction
 				},
 				transferDialog: true
 			})

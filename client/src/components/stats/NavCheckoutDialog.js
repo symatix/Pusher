@@ -29,7 +29,8 @@ export default class NavCheckoutDialog extends React.Component {
 		this.setState({ value: 0, pay: true })
 	}
 	handleSubmit() {
-		const stateChange = this.props.title.toLowerCase()
+		const stateChange = this.props.title.toLowerCase();
+
 		// 3 variables, first the value, than the key in store and after that does it add or substract money
 		this.props.action(this.state.value, stateChange, this.state.pay);
 		this.setState({ value: 0, pay: true })

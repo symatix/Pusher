@@ -26,8 +26,8 @@ function NavListItem(props) {
 		}
 	}
 	return (
-		<ListItem onClick={() => props.action(props.text, props.label)} button>
-			<ListItemText primary={props.primary} secondary={props.secondary}/>
+		<ListItem disabled={props.action === "" ? true : false} onClick={() => props.action(props.text, props.label)} button>
+			<ListItemText  primary={props.primary} secondary={props.secondary}/>
 			<ListItemIcon>
 				{icon()}
 			</ListItemIcon>

@@ -55,38 +55,42 @@ export default class DrugCheckoutDialog extends React.Component {
 		return (<div>
             <Dialog open={open} onRequestClose={this.handleClose}>
 				<DialogTitle
-				style={dialogStyle}>
+					style={dialogStyle}>
 					{name}
 					&emsp;
-					<Button raised={this.state.buy} disabled={this.state.buy} onClick={this.toggleAction} color="default">
+					<Button
+						raised={this.state.buy}
+						disabled={this.state.buy}
+						onClick={this.toggleAction}
+						color="default">
 					Buy
 					</Button>
 					{this.renderSell()}
 
 				</DialogTitle>
-              <DialogContent>
+                <DialogContent>
                     <form
                         style={{padding:'25px 15px 5px 15px'}}
                         onSubmit={this.handleSubmit}>
-                    <Slider
-                        defaultValue={0}
-                        min={0}
-                        max={max}
-                        onChange={this.handleChange}
-                        trackStyle={{backgroundColor:teal[800], height: 10}}
-                        railStyle={{
-                            backgroundColor: teal[200],
-                            height: 10}}
-                        handleStyle={{
-                          borderColor: color,
-                          height: 28,
-                          width: 28,
-                          marginLeft: -14,
-                          marginTop: -9,
-                          backgroundColor: color,
-                        }}
-                    />
-                </form>
+	                    <Slider
+	                        defaultValue={0}
+	                        min={0}
+	                        max={max}
+	                        onChange={this.handleChange}
+	                        trackStyle={{backgroundColor:teal[800], height: 10}}
+	                        railStyle={{
+	                            backgroundColor: teal[200],
+	                            height: 10}}
+	                        handleStyle={{
+	                          borderColor: color,
+	                          height: 28,
+	                          width: 28,
+	                          marginLeft: -14,
+	                          marginTop: -9,
+	                          backgroundColor: color,
+	                        }}
+	                    />
+                    </form>
 
                 </DialogContent>
                 <div style={{
