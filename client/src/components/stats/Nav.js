@@ -38,7 +38,7 @@ class Nav extends React.Component {
 		const cardStats = [stats.city, stats.money, stats.pusher];
 
 		return (
-			<div className={classes.root} style={{ width: 500 }}>
+			<div className={classes.root} style={{ width: '100%' }}>
         <AppBar position="static" color="default">
           <Tabs
             value={this.state.value}
