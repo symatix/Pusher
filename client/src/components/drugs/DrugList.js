@@ -11,11 +11,13 @@ const styles = theme => ({
 		width: '100%',
 		height: '100%',
 		margin: '0 auto',
-		overflowX: 'auto',
 	},
 	tableRow: {
 		fontSize: '1.5em',
 		cursor: 'pointer'
+	},
+	headCell:{
+		padding:'0 10px'
 	}
 });
 
@@ -33,17 +35,17 @@ const DrugList = (props) => {
 					<Table>
 					    <TableHead>
 					        <TableRow>
-					            <TableCell>Merch</TableCell>
-					            <TableCell numeric>Price</TableCell>
-					            <TableCell numeric>Possession</TableCell>
+					            <TableCell className={classes.headCell}>Merch</TableCell>
+					            <TableCell className={classes.headCell} >Price</TableCell>
+					            <TableCell numeric className={classes.headCell} >Possession</TableCell>
 					        </TableRow>
 					    </TableHead>
 					    <TableBody>
 					        {props.drugs.map(d => { return (
 					        <TableRow className={classes.tableRow} key={d.name} hover onClick={()=> handleClick(d)} >
 					            <TableCell>{d.name}</TableCell>
-					            <TableCell numeric>{formatPrice(d.price)}</TableCell>
-					            <TableCell numeric>{d.possession}</TableCell>
+					            <TableCell  >{formatPrice(d.price)}</TableCell>
+					            <TableCell numeric >{d.possession}</TableCell>
 					        </TableRow>
 					        ); })}
 					    </TableBody>

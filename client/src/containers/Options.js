@@ -10,7 +10,7 @@ import Fingerprint from 'material-ui-icons/Fingerprint';
 
 const styles = theme => ({
   paper: {
-    padding: 16,
+    padding: '15px 5px',
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
