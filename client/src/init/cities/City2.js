@@ -2,6 +2,7 @@ export default {
 	name: 'Dubrovnik',
 	status: 'bank',
 	raids: 0.1,
+	cityCops: 17,
 	gangs: 0.1,
 	gangMembers: 15,
 	priceDrop: 0.4,

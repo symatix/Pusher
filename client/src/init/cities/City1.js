@@ -2,6 +2,7 @@ export default {
 	name: 'Zagreb',
 	status: 'loaner',
 	raids: 0.4,
+	cityCops: 27,
 	gangs: 0.25,
 	gangMembers: '45',
 	priceDrop: 0.1,

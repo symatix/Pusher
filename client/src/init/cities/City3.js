@@ -2,6 +2,7 @@ export default {
 	name: 'Rijeka',
 	status: 'hospital',
 	raids: 0.35,
+	cityCops: 34,
 	gangs: 0.15,
 	gangMembers: 25,
 	priceDrop: 0.4,

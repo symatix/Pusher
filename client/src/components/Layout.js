@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Grid, Row, Col } from 'react-flexgrid';
-import Drugs from './Drugs';
-import Console from './Console';
+import Drugs from '../containers/Drugs';
+import Stats from '../containers/Stats';
 
 
-const Game = () => {
+const Layout = () => {
 	return (
 		<Grid>
 			<Row center="sm">
@@ -13,11 +13,11 @@ const Game = () => {
 				</Col>
 
 				<Col xs={12} sm={4}>
-					<Console />
+					<Stats />
 				</Col>
 			</Row>
         </Grid>
 	)
 }
 
-export default Game;
+export default Layout;

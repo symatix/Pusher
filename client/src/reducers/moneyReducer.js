@@ -4,16 +4,17 @@ export default function (state = {}, action) {
 
 	switch (action.type) {
 	case CHANGE_CITY:
+		// on every city change, money has to be updated
 		const dept = {
 			deposit: Math.floor(state.deposit * 1.03),
-			loaner: Math.floor(state.loaner * 1.1),
-			bank: Math.floor(state.bank * 1.05)
+			loaner: Math.floor(state.loaner * 1.2),
+			bank: Math.floor(state.bank * 1.05),
+			cash: state.cash - (state.bribe + state.salary),
 		}
 		return _.merge({}, state, dept)
 
 	case HANDLE_DRUG:
-		const newState = { cash: action.payload.cash }
-		return _.merge({}, state, newState)
+		return _.merge({}, state, action.payload.money)
 
 	case PAY_AMOUNT:
 		return _.merge({}, state, action.payload)

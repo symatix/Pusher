@@ -10,8 +10,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import muiTheme from '../style/colors';
 // components
 import Login from './Login';
-import NewGame from './NewGame';
-import Game from './Game';
+import NewGame from '../containers/NewGame';
+import Layout from './Layout';
 //typography
 import 'typeface-roboto'
 import 'react-flexgrid/lib/flexgrid.css'
@@ -44,7 +44,7 @@ class App extends Component {
 							<div>
 		                        <Route exact path="/" component={Login} />
 								<Route exact path="/new" component={NewGame} />
-								<Route exact path="/on" component={Game} />
+								<Route exact path="/on" component={Layout} />
 							</div>
 		                </BrowserRouter>
 		            </Grid>

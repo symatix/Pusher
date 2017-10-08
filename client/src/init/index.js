@@ -16,7 +16,7 @@ export default {
 		gun: [0, 0, 0], // damage [min, max]
 		pushers: [0, 0, 0], // income [min, max, pushers]
 		thugs: [0, 0, 0], // damage [min, max, thugs]
-		cops: 0, // damage [min, max, thugs]
+		payrollCops: 0, // damage [min, max, thugs]
 	},
 	money: {
 		cash: 2000,

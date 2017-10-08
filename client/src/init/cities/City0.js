@@ -2,6 +2,7 @@ export default {
 	name: 'Split',
 	status: 'shop',
 	raids: 0.35,
+	cityCops: 36,
 	gangs: 0.3,
 	gangMembers: 32,
 	priceDrop: 0.2,

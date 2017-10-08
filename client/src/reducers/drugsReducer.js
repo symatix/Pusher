@@ -14,9 +14,10 @@ export default function (state = [], action) {
 		return drugs;
 
 	case HANDLE_DRUG:
-		const { name, possession } = action.payload;
-		const newDrug = _.merge({}, _.find(state, { name }), { name, possession })
+		const { name } = action.payload.drugs;
+		const newDrug = _.merge({}, _.find(state, { name }), action.payload.drugs)
 		const newState = _.map(state, (drug) => {
+
 			if (drug.name === newDrug.name) {
 				drug = newDrug;
 			}

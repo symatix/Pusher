@@ -2,6 +2,7 @@ export default {
 	name: 'Vukovar',
 	status: 'recruit',
 	raids: 0.30,
+	cityCops: 41,
 	gangs: 0.24,
 	gangMembers: 40,
 	priceDrop: 0.1,

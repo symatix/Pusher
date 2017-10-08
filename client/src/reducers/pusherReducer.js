@@ -8,8 +8,7 @@ export default function (state = {}, action) {
 		return _.merge({}, state, newDay)
 
 	case HANDLE_DRUG:
-		const newAmount = state.possession + action.payload.amount;
-		return _.merge({}, state, { possession: newAmount })
+		return _.merge({}, state, action.payload.pusher)
 
 	default:
 		return state
