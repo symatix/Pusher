@@ -4,7 +4,11 @@ import InfoOutline from 'material-ui-icons/InfoOutline';
 import AttachMoney from 'material-ui-icons/AttachMoney';
 import Flight from 'material-ui-icons/Flight';
 import SupervisorAccount from 'material-ui-icons/SupervisorAccount';
-import LocalHospital from 'material-ui-icons/LocalHospital';
+import Fingerprint from 'material-ui-icons/Fingerprint';
+import LocalPharmacy from 'material-ui-icons/LocalPharmacy';
+import SentimentNeutral from 'material-ui-icons/SentimentNeutral';
+import ShoppingBasket from 'material-ui-icons/ShoppingBasket';
+import MyLocation from 'material-ui-icons/MyLocation';
 
 function NavListItem(props) {
 
@@ -19,7 +23,19 @@ function NavListItem(props) {
 			return <SupervisorAccount/>
 		}
 		if (props.type === "hospital") {
-			return <LocalHospital/>
+			return <LocalPharmacy/>
+		}
+		if (props.type === "cops"){
+			return <Fingerprint />
+		}
+		if (props.type ==="thugs"){
+			return <SentimentNeutral />
+		}
+		if (props.type ==="storage"){
+			return <ShoppingBasket />
+		}
+		if (props.type ==="gun"){
+			return <MyLocation />
 		}
 		if (props.type === "travel") {
 			return <Flight/>

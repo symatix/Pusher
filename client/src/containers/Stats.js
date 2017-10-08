@@ -28,10 +28,12 @@ class Stats extends Component {
 			}
 		}
 		this.handleLocation = this.handleLocation.bind(this);
+		// functions to be passed as props to children
 		this.passTravelDialog = this.passTravelDialog.bind(this);
 		this.passInfoDialog = this.passInfoDialog.bind(this);
 		this.passTransferDialog = this.passTransferDialog.bind(this);
-		this.handleTransaction = this.handleTransaction.bind(this);
+		// functions that handle redux state
+		this.handleMoney = this.handleMoney.bind(this);
 	}
 	passTravelDialog() {
 		this.setState({
@@ -56,28 +58,27 @@ class Stats extends Component {
 			this.setState({
 				transferData: {
 					title: decision[0].toUpperCase() + decision.substring(1),
-					firstMax: loaner > cash
-						? cash
-						: loaner,
+					firstMax: loaner > cash ? cash : loaner,
 					secondMax: 0,
 					total: loaner,
 					btnText: ["Pay"],
 					cash: this.props.cash,
-					action: this.handleTransaction
+					action: this.handleMoney
 				},
 				transferDialog: true
 			})
 		}
 		if (decision === "bank") {
+			const { days } = this.props.pusher;
 			this.setState({
 				transferData: {
 					title: decision[0].toUpperCase() + decision.substring(1),
 					firstMax: bank > cash ? cash : bank,
-					secondMax: 100000,
+					secondMax: days < 30 ? days * 200 : 1000000, // maximum amount to borrow from bank
 					total: bank,
 					btnText: ["Pay", "Borrow"],
 					cash: this.props.cash,
-					action: this.handleTransaction
+					action: this.handleMoney
 				},
 				transferDialog: true
 			})
@@ -90,7 +91,7 @@ class Stats extends Component {
 					secondMax: deposit,
 					total: cash,
 					btnText: ["Deposit", "Withdraw"],
-					action: this.handleTransaction
+					action: this.handleMoney
 				},
 				transferDialog: true
 			})
@@ -107,7 +108,7 @@ class Stats extends Component {
 		this.props.changeActiveCity(newCity, this.props.activeCity);
 		this.setState({travelDialog: false})
 	}
-	handleTransaction(state, storeLocation, pay) {
+	handleMoney(state, storeLocation, pay) {
 		if (!state) {
 			this.setState({transferDialog: false});
 			return;

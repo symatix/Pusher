@@ -50,10 +50,10 @@ export default (stats) => {
 		pusher: [
 			{ type: "info", data: days, label: "DAYS ACTIVE", action: actions.info, text: pusher.days },
 			{ type: "hospital", data: `${health} | 100`, label: "HEALTH", action: "", text: "hospital" },
-			{ type: "transaction", data: `${possession} | ${storage}`, label: "POSSESSION | STORAGE", action: "", text: "storage" },
-			{ type: "transaction", data: `${gun[2]}`, label: "GUNS", action: "", text: "guns" },
-			{ type: "people", data: `${ownedCops}`, label: "COPS", action: "", text: "cops" },
-			{ type: "people", data: `${ownedThugs}`, label: "THUGS", action: "", text: "thugs" },
+			{ type: "storage", data: `${possession} | ${storage}`, label: "POSSESSION | STORAGE", action: "", text: "storage" },
+			{ type: "gun", data: `${gun[2]}`, label: "GUNS", action: "", text: "guns" },
+			{ type: "cops", data: `${ownedCops}`, label: "COPS", action: "", text: "cops" },
+			{ type: "thugs", data: `${ownedThugs}`, label: "THUGS", action: "", text: "thugs" },
         ]
 	}
 }

@@ -23,6 +23,7 @@ const NewGame = (props) => {
 
 function mapStateToProps({ cities }) {
 	const randomCity = Math.floor(Math.random() * cities.length);
+	console.log(randomCity)
 	return { start: cities[randomCity].prices }
 }
 export default connect(mapStateToProps, { calculatePrices })(NewGame);
