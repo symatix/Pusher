@@ -19,7 +19,6 @@
     "material-ui-icons": "^1.0.0-beta.15",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-flexgrid": "^1.0.0",
     "react-modal": "^2.3.2",
     "react-progressbar": "^15.4.1",
     "react-redux": "^5.0.6",

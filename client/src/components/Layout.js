@@ -1,22 +1,28 @@
 import React from 'react';
-import { Grid, Row, Col } from 'react-flexgrid';
+import Grid from 'material-ui/Grid';
+//import { Grid, Row, Col } from 'react-flexgrid';
+import Options from '../containers/Options';
 import Drugs from '../containers/Drugs';
 import Stats from '../containers/Stats';
 
 
 const Layout = () => {
 	return (
-		<Grid>
-			<Row center="sm">
-				<Col xs={12} sm={6}>
+		<div>
+			<Grid container justify="center">
+				<Grid item xs={12} md={6} lg={8}>
+					<Options />
+				</Grid>
+			</Grid>
+			<Grid container justify="center" direction="row">
+				<Grid item xs={12} md={6} lg={4}>
 					<Drugs />
-				</Col>
-
-				<Col xs={12} sm={4}>
+				</Grid>
+				<Grid item xs={12} md={6} lg={4}>
 					<Stats />
-				</Col>
-			</Row>
-        </Grid>
+				</Grid>
+			</Grid>
+		</div>
 	)
 }
 
