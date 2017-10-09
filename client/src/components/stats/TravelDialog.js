@@ -3,6 +3,7 @@ import { withStyles } from 'material-ui/styles';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import FlightTakeoff from 'material-ui-icons/FlightTakeoff';
 import Dialog, { DialogTitle } from 'material-ui/Dialog';
+import { teal } from 'material-ui/colors';
 
 const styles = theme => ({
 	root: {
@@ -26,11 +27,15 @@ function TravelDialog(props) {
 	      <List>
 	        	{cityList.map((city, index) => {
 					return (
-						<ListItem key={city+index} button onClick={()=>handleClick({name:city})}>
+						<ListItem
+							button
+							disabled={props.activeCity === city ? true : false}
+							key={city+index}
+							onClick={()=>handleClick({name:city})}>
 				          <ListItemIcon>
 				            <FlightTakeoff />
 				          </ListItemIcon>
-				          <ListItemText primary={city} />
+				          <ListItemText primary={city}/>
 				        </ListItem>
 					)
 				})}

@@ -38,7 +38,7 @@ const styles = theme => ({
         fontSize:'35px',
         fill: 'black',
         '&:hover': {
-            fill: red[400],
+            fill: teal[400],
         },
         transform: 'rotate(180deg)',
         transition:'transform 0.2s ease-in'
@@ -47,7 +47,7 @@ const styles = theme => ({
         width:'100%',
         height:'100%',
         fontSize:'35px',
-        fill: red[400],
+        fill: teal[400],
         transition:'transform 0.2s ease-in'
     },
 });

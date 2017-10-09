@@ -52,7 +52,7 @@ const DrugList = (props) => {
 				<CardContent>
 			        {props.drugs.map(d => { return (
 						<ListItem
-							key={d.name} 
+							key={d.name}
 							onClick={()=> handleClick(d)}
 							button>
 				      		<GridList

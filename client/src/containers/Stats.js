@@ -136,7 +136,7 @@ class Stats extends Component {
 		return (
 			<div>
 				<Nav stats={stats}/>
-				<TravelDialog open={this.state.travelDialog} handleLocation={this.handleLocation} cityList={cityList}/>
+				<TravelDialog open={this.state.travelDialog} handleLocation={this.handleLocation} cityList={cityList} activeCity={this.props.activeCity.name}/>
 				<NavCheckoutDialog open={this.state.transferDialog} {...this.state.transferData}/>
 				<InfoDialog open={this.state.infoDialog} text={this.state.infoData.text} heading={this.state.infoData.heading} action={this.passInfoDialog}/>
 			</div>
