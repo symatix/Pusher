@@ -47,6 +47,7 @@ export default class NavCheckoutDialog extends React.Component {
 		const max = this.state.pay ? firstMax : secondMax;
 		const maxTotal = this.state.pay ? total : secondMax;
 		const color = !max ? red[900] : teal[800];
+		const labelColor = !max ? 'rgba(183, 28, 28, 0.2)' : 'rgba(0, 121, 107, 0.2)';
 		const button = this.state.pay ? btnText[0] : btnText[1];
 		const chipText = !max ? "Pushing too hard!" : `${formatPrice(this.state.value)} / ${formatPrice(max)} | ${formatPrice(maxTotal)}`;
 		return (<div>
@@ -93,13 +94,13 @@ export default class NavCheckoutDialog extends React.Component {
               		width: '98%',
                     margin:'1%'
               	}}>
-                    <Chip
-                        label={chipText}
-                        style={{backgroundColor:color, width:'50%'}}/>
+					<Button raised disabled color="primary" style={{backgroundColor:labelColor, color:'white', width:'80%'}}>
+						{chipText}
+					</Button>
                     <Button
                         onClick={this.handleSubmit}
                         color="primary"
-                        style={{width:'50%'}}>
+                        style={{width:'30%'}}>
                       {button}
                     </Button>
                 </div>

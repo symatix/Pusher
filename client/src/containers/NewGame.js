@@ -57,7 +57,6 @@ NewGame.propTypes = {
 
 function mapStateToProps({ cities }) {
 	const randomCity = Math.floor(Math.random() * cities.length);
-	console.log(randomCity)
 	return { start: cities[randomCity].prices }
 }
 

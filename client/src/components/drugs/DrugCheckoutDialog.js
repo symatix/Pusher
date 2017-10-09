@@ -52,6 +52,7 @@ export default class DrugCheckoutDialog extends React.Component {
 		const max = this.state.buy ? maxBuy : possession;
 		const btnText = this.state.buy ? "Buy" : "Sell";
 		const color = !max ? red[900] : teal[800];
+		const labelColor = !max ? 'rgba(183, 28, 28, 0.2)' : 'rgba(0, 121, 107, 0.2)';
 		return (<div>
             <Dialog open={open} onRequestClose={this.handleClose}>
 				<DialogTitle
@@ -100,13 +101,13 @@ export default class DrugCheckoutDialog extends React.Component {
               		width: '98%',
                     margin:'1%'
               	}}>
-                    <Chip
-                        label={this.renderChipLabel()}
-                        style={{backgroundColor:color, width:'50%'}}/>
+					<Button raised disabled color="primary" style={{backgroundColor:labelColor, color:'white', width:'80%'}}>
+						{this.renderChipLabel()}
+					</Button>
                     <Button
                         onClick={this.handleSubmit}
                         color="primary"
-                        style={{width:'50%'}}>
+                        style={{width:'30%'}}>
                       {btnText}
                     </Button>
                 </div>
