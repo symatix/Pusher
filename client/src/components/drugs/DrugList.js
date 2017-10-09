@@ -51,11 +51,13 @@ const DrugList = (props) => {
 			<Card className={classes.card}>
 				<CardContent>
 			        {props.drugs.map(d => { return (
-						<ListItem key={d.name} button>
+						<ListItem
+							key={d.name} 
+							onClick={()=> handleClick(d)}
+							button>
 				      		<GridList
 								cellHeight={15}
 								cols={12}
-								onClick={()=> handleClick(d)}
 								className={classes.gridList} >
 
 								<GridListTile className={classes.gridListTile} cols={5}>
