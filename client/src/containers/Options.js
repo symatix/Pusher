@@ -20,17 +20,17 @@ function Options(props) {
     const classes = props.classes;
     return (
             <Paper className={classes.paper} elevation={4}>
-                <Link className={classes.link} to="/new">
-                    <Button raised color="primary">
-                        New Game
-                    </Button>
-                </Link>
                 <Button disabled raised color="primary">
                     Load Game
                 </Button>
                 <Button disabled raised color="primary">
                     Save Game
                 </Button>
+                <Link className={classes.link} to="/new">
+                    <Button raised color="primary">
+                        New Game
+                    </Button>
+                </Link>
             </Paper>
     );
 }
