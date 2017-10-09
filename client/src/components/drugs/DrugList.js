@@ -27,6 +27,7 @@ const styles = theme => ({
 	marketMenu:{
 		margin:0,
 		padding:'15px 0 5px 0',
+		borderTop:'2px solid #00695C',
 		backgroundColor:'#212121',
 		boxShadow:' 0px -11px 8px -10px rgba(0, 0, 0, 0.2), 0px -11px 8px -10px rgba(0, 0, 0, 0.2) ',
 	},
