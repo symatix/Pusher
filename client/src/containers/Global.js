@@ -4,13 +4,9 @@ import Button from 'material-ui/Button';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Dialog, { DialogActions, DialogContent } from 'material-ui/Dialog';
-import { GridList, GridListTile } from 'material-ui/GridList';
-import {ListItem} from 'material-ui/List';
-import Typography from 'material-ui/Typography';
+import GlobalStats from '../components/GlobalStats';
 import Slide from 'material-ui/transitions/Slide';
 import ExpandMore from 'material-ui-icons/ExpandMore';
-import Icon from '../components/icons/Icon';
-import formatPrice from '../utils/formatPrice'
 import {teal, grey} from 'material-ui/colors';
 
 const styles = theme => ({
@@ -58,7 +54,7 @@ const styles = theme => ({
     },
 });
 
-class GlobalNav extends React.Component {
+class Global extends React.Component {
   state = {
     open: false,
   };
@@ -72,45 +68,15 @@ class GlobalNav extends React.Component {
   };
 
   render() {
-      const { classes, cash, health, cops, thugs, city, possession } = this.props;
+      const { classes } = this.props;
     return (
       <div>
         <Button fab aria-label="add" className={classes.button}>
             <ExpandMore className={this.state.open ? classes.iconHoverOn : classes.iconHoverOff} onClick={this.handleClickOpen} />
         </Button>
         <Dialog open={this.state.open} transition={<Slide direction="up"/>} onRequestClose={this.handleRequestClose}>
-
-                <ListItem>
-                    <GridList
-                        className={classes.gridList}
-                        cellHeight="auto"
-                         align="center"
-                        cols={4}>
-                        <GridListTile cols={4}>
-                            <Typography type="headline" gutterBottom>{formatPrice(cash)}</Typography>
-                        </GridListTile>
-                        <GridListTile cols={1}>
-                            <Icon id="storage" /> <Typography type="body1" gutterBottom>{possession}</Typography>
-                        </GridListTile>
-                        <GridListTile cols={1}>
-                            <Icon id="hospital" /> <Typography type="body1" gutterBottom>{health}</Typography>
-                        </GridListTile>
-                        <GridListTile cols={1}>
-                            <Icon id="cops" /> <Typography type="body1" gutterBottom>{cops}</Typography>
-                        </GridListTile>
-                        <GridListTile cols={1}>
-                            <Icon id="thugs" /> <Typography type="body1" gutterBottom>{thugs}</Typography>
-                        </GridListTile>
-                        <GridListTile cols={4}>
-                            <Typography type="caption" gutterBottom>{city}</Typography>
-                        </GridListTile>
-                    </GridList>
-                </ListItem>
-
-
+            <GlobalStats {...this.props} />
           <DialogContent>
-
-
           </DialogContent>
           <DialogActions className={classes.actionButtons}>
             <Button onClick={this.handleRequestClose} color="primary">
@@ -129,7 +95,7 @@ class GlobalNav extends React.Component {
   }
 }
 
-GlobalNav.propTypes = {
+Global.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
@@ -144,4 +110,4 @@ function mapStateToProps({activeCity, money, pusher}){
     }
     return props;
 }
-export default connect(mapStateToProps)(withStyles(styles)(GlobalNav));
+export default connect(mapStateToProps)(withStyles(styles)(Global));

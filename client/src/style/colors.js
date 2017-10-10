@@ -11,6 +11,7 @@ const muiTheme = createMuiTheme({
 		success: green,
 		inProgress: yellow,
 		error: red,
+		alternateTextColor:green,
 		type: 'dark'
 	})
 })

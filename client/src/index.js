@@ -7,11 +7,10 @@ import reducers from './reducers';
 import initState from './init'
 import App from './components/App';
 
-import './assets/icons/font/flaticon.css';
-
 const store = createStore(reducers, initState, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
 	<Provider store={store}>
         <App />
-    </Provider>, document.getElementById('root'));
+    </Provider>
+, document.getElementById('root'));
