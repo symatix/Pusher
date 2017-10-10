@@ -8,6 +8,8 @@ import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
 import formatPrice from '../../utils/formatPrice'
 
+
+
 const styles = theme => ({
 	paper: {
 		width: '100%',
@@ -24,6 +26,8 @@ const styles = theme => ({
 	gridListTile:{
 		padding:'0 !important'
 	},
+	footerBtn:{
+	},
 	marketMenu:{
 		margin:0,
 		padding:'15px 0 5px 0',
@@ -36,6 +40,10 @@ const styles = theme => ({
 	},
 	headCell:{
 		padding:'0 10px'
+	},
+	ripple:{
+		display:'block !important',
+		overflow:'visible !important'
 	}
 });
 
@@ -74,17 +82,17 @@ const DrugList = (props) => {
 			        ); })}
 				</CardContent>
 			 </Card>
-			 <GridList className={classes.marketMenu} style={{color:'white'}} cellHeight={30} cols={12}>
-				 <GridListTile  cols={4}>
-					 <Typography type="button" gutterBottom align="center">Merch</Typography>
-				 </GridListTile>
-				 <GridListTile cols={4}>
-					 <Typography type="button" gutterBottom align="center">Price</Typography>
-				 </GridListTile>
-				 <GridListTile cols={4}>
-					 <Typography type="button" gutterBottom align="center">Possession</Typography>
-				 </GridListTile>
-			 </GridList>
+				<GridList ripple="ripple" className={classes.marketMenu} id="toTop" style={{color:'white'}} cellHeight={30} cols={12}>
+					<GridListTile  cols={4}>
+						<Typography type="button" gutterBottom align="center">Merch</Typography>
+					</GridListTile>
+					<GridListTile cols={4}>
+						<Typography type="button" gutterBottom align="center">Price</Typography>
+					</GridListTile>
+					<GridListTile cols={4}>
+						<Typography type="button" gutterBottom align="center">Possession</Typography>
+				 	</GridListTile>
+				</GridList>
     	</Paper>
 	);
 }

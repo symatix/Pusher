@@ -4,6 +4,7 @@ import { withStyles } from 'material-ui/styles';
 import SwipeableViews from 'react-swipeable-views';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
+import { GridList } from 'material-ui/GridList';
 import NavCard from './NavCard';
 
 function TabContainer(props) {
@@ -17,7 +18,13 @@ TabContainer.propTypes = {
 const styles = theme => ({
 	root: {
 		backgroundColor: theme.palette.background.paper,
+		height:'100%'
 	},
+	// a bit of a fix, but can't set position:"absolute"
+	menu:{
+		width:'100.5%',
+		margin:'-0.25%',
+	}
 });
 
 class Nav extends React.Component {
@@ -38,29 +45,29 @@ class Nav extends React.Component {
 		const cardStats = [stats.city, stats.money, stats.pusher];
 
 		return (
-			<div className={classes.root} style={{ width: '100%' }}>
-        <AppBar position="static" color="default">
-          <Tabs
-            value={this.state.value}
-            onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            fullWidth>
-            <Tab label="City" />
-            <Tab label="Money" />
-            <Tab label="Pusher" />
-          </Tabs>
-        </AppBar>
-        <SwipeableViews index={this.state.value} onChangeIndex={this.handleChangeIndex}>
-			{cardStats.map((card, index) => {
-				return(
-					<TabContainer key={index}>
-		                <NavCard stats={card} />
-		            </TabContainer>
-				)
-			})}
-        </SwipeableViews>
-      </div>
+			<div className={classes.root}>
+				<AppBar className={classes.menu} position="static" color="default">
+					<Tabs
+						value={this.state.value}
+						onChange={this.handleChange}
+						indicatorColor="primary"
+						textColor="primary"
+						fullWidth>
+						<Tab label="City" />
+						<Tab label="Money" />
+						<Tab label="Pusher" />
+					</Tabs>
+				</AppBar>
+		        <SwipeableViews index={this.state.value} onChangeIndex={this.handleChangeIndex}>
+					{cardStats.map((card, index) => {
+						return(
+							<TabContainer key={index}>
+				                <NavCard stats={card} />
+				            </TabContainer>
+						)
+					})}
+		        </SwipeableViews>
+      		</div>
 		);
 	}
 }

@@ -1,4 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import AppBar from 'material-ui/AppBar';
+import Tabs, { Tab } from 'material-ui/Tabs';
 import Button from 'material-ui/Button';
 import Slider from '@graphistry/rc-slider';
 import Chip from 'material-ui/Chip';
@@ -12,21 +16,23 @@ import '@graphistry/rc-slider/assets/index.css';
 export default class NavCheckoutDialog extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { pay: true, value: 0 }
+		this.state = { pay: true, value: 0, action:1 }
 		this.toggleAction = this.toggleAction.bind(this)
 		this.handleChange = this.handleChange.bind(this)
 		this.handleClose = this.handleClose.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
 	}
-	toggleAction() {
-		this.setState({ pay: !this.state.pay })
+	toggleAction(e, action) {
+		if (this.props.btnText[1]){
+			this.setState({ pay: !this.state.pay, action  })
+		}
 	}
 	handleChange(value) {
 		this.setState({ value })
 	}
 	handleClose() {
 		this.props.action(null);
-		this.setState({ value: 0, pay: true })
+		this.setState({ value: 0, pay: true, action: 1 })
 	}
 	handleSubmit() {
 		const stateChange = this.props.title.toLowerCase();
@@ -34,13 +40,6 @@ export default class NavCheckoutDialog extends React.Component {
 		// 3 variables, first the value, than the key in store and after that does it add or substract money
 		this.props.action(this.state.value, stateChange, this.state.pay);
 		this.setState({ value: 0, pay: true })
-	}
-	renderSell() {
-		if (this.props.btnText[1]) {
-			return (<Button raised={!this.state.pay} disabled={!this.state.pay} onClick={this.toggleAction} color="default">
-                  {this.props.btnText[1]}
-                </Button>)
-		}
 	}
 	render() {
 		const { title, firstMax, secondMax, total, btnText, open } = this.props;
@@ -52,16 +51,19 @@ export default class NavCheckoutDialog extends React.Component {
 		const chipText = !max ? "Pushing too hard!" : `${formatPrice(this.state.value)} / ${formatPrice(max)} | ${formatPrice(maxTotal)}`;
 		return (<div>
             <Dialog open={open} onRequestClose={this.handleClose}>
-              <DialogTitle
-				  style={dialogStyle}>
-                  {title}
-                  &emsp;
-                 <Button raised={this.state.pay} disabled={this.state.pay} onClick={this.toggleAction} color="default">
-                   {btnText[0]}
-                 </Button>
-                 {this.renderSell()}
 
-              </DialogTitle>
+				<AppBar style={{minWidth:'300px'}} position="static" color="default">
+					<Tabs
+						value={this.state.action}
+						onChange={this.toggleAction}
+						indicatorColor="primary"
+						textColor="primary"
+						fullWidth>
+						<Tab style={{minWidth:'100px'}} disabled label={title} />
+						<Tab style={{minWidth:'100px'}} label={btnText[0]} />
+						<Tab style={{minWidth:'100px'}} disabled={!btnText[1] ? true : false} label={ btnText[1] ? btnText[1] : ""} />
+					</Tabs>
+				</AppBar>
               <DialogContent>
                     <form
                         style={{padding:'25px 15px 5px 15px'}}

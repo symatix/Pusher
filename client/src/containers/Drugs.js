@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import DrugList from '../components/drugs/DrugList';
 import DrugCheckoutDialog from '../components/drugs/DrugCheckoutDialog';
 import * as actions from '../actions';
+import '../utils/scrollToTop'
 
 class Drugs extends Component {
 	constructor(props) {
@@ -18,6 +19,17 @@ class Drugs extends Component {
 		if (nextProps.activeCity.name !== this.props.activeCity.name) {
 			this.props.calculatePrices(nextProps.activeCity.prices)
 		}
+	}
+	// set up an event listener for scrollToTop - DrugList component
+	componentDidMount(){
+		document.querySelector('#toTop').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scroll({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });
+        });
 	}
 
 	// injects drug inside activeDrug reducer and activates buy/sell dialog

@@ -10,9 +10,9 @@ import Dialog, {
 } from 'material-ui/Dialog';
 import Slide from 'material-ui/transitions/Slide';
 import ExpandMore from 'material-ui-icons/ExpandMore';
-import dialogStyle from '../style/dialog'
 
-import {teal, red, grey} from 'material-ui/colors';
+
+import {teal, grey} from 'material-ui/colors';
 
 const styles = theme => ({
     button: {
@@ -38,7 +38,7 @@ const styles = theme => ({
         fontSize:'35px',
         fill: 'black',
         '&:hover': {
-            fill: teal[400],
+            fill: teal[600],
         },
         transform: 'rotate(180deg)',
         transition:'transform 0.2s ease-in'
@@ -72,12 +72,12 @@ class GlobalNav extends React.Component {
         <Button fab aria-label="add" className={classes.button}>
             <ExpandMore className={this.state.open ? classes.iconHoverOn : classes.iconHoverOff} onClick={this.handleClickOpen} />
         </Button>
-        <Dialog open={this.state.open} transition={Slide} onRequestClose={this.handleRequestClose}>
+        <Dialog open={this.state.open} transition={<Slide direction="up"/>} onRequestClose={this.handleRequestClose}>
           <DialogTitle className={classes.title}>{"Options"}</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              Imagine some stats here...
-            </DialogContentText>
+
+              
+
           </DialogContent>
           <DialogActions align="center">
             <Button className={classes.buttonOption} onClick={this.handleRequestClose} color="primary">

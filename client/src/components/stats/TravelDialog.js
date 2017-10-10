@@ -3,7 +3,6 @@ import { withStyles } from 'material-ui/styles';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import FlightTakeoff from 'material-ui-icons/FlightTakeoff';
 import Dialog, { DialogTitle } from 'material-ui/Dialog';
-import { teal } from 'material-ui/colors';
 
 const styles = theme => ({
 	root: {

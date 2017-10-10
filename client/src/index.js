@@ -7,6 +7,7 @@ import reducers from './reducers';
 import initState from './init'
 import App from './components/App';
 
+
 const store = createStore(reducers, initState, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
