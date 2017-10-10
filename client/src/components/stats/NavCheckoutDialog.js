@@ -39,7 +39,7 @@ export default class NavCheckoutDialog extends React.Component {
 
 		// 3 variables, first the value, than the key in store and after that does it add or substract money
 		this.props.action(this.state.value, stateChange, this.state.pay);
-		this.setState({ value: 0, pay: true })
+		this.setState({ action: 1, value: 0, pay: true })
 	}
 	render() {
 		const { title, firstMax, secondMax, total, btnText, open } = this.props;

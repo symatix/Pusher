@@ -39,11 +39,11 @@ class DrugCheckoutDialog extends React.Component {
 	}
 	handleClose() {
 		this.props.drugCheckout(null);
-		this.setState({ value: 0, buy: true })
+		this.setState({ action: 1, value: 0, buy: true })
 	}
 	handleSubmit() {
 		this.props.drugCheckout(this.state.value, this.state.buy);
-		this.setState({ value: 0, buy: true })
+		this.setState({ action: 1, value: 0, buy: true })
 	}
 
 	renderSell() {
