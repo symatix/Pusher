@@ -1,8 +1,8 @@
 import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import FlightTakeoff from 'material-ui-icons/FlightTakeoff';
-import Dialog, { DialogTitle } from 'material-ui/Dialog';
+import Icon from '../icons/Icon';
+import Dialog from 'material-ui/Dialog';
 
 const styles = theme => ({
 	root: {
@@ -21,7 +21,6 @@ function TravelDialog(props) {
 
 	return (
 		<Dialog onRequestClose={()=>handleLocation(null)} open={open}>
-        <DialogTitle>Change city</DialogTitle>
 		<div className={classes.root}>
 	      <List>
 	        	{cityList.map((city, index) => {
@@ -32,7 +31,7 @@ function TravelDialog(props) {
 							key={city+index}
 							onClick={()=>handleClick({name:city})}>
 				          <ListItemIcon>
-				            <FlightTakeoff />
+							 <Icon id="airplane" />
 				          </ListItemIcon>
 				          <ListItemText primary={city}/>
 				        </ListItem>

@@ -1,15 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Button from 'material-ui/Button';
 import Slider from '@graphistry/rc-slider';
-import Chip from 'material-ui/Chip';
-import Dialog, { DialogContent, DialogTitle } from 'material-ui/Dialog';
+import Dialog, { DialogContent } from 'material-ui/Dialog';
 import formatPrice from '../../utils/formatPrice'
 import { teal, red } from 'material-ui/colors'
-import dialogStyle from '../../style/dialog'
 import '@graphistry/rc-slider/assets/index.css';
 
 

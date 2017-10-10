@@ -4,7 +4,6 @@ import { withStyles } from 'material-ui/styles';
 import SwipeableViews from 'react-swipeable-views';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
-import { GridList } from 'material-ui/GridList';
 import NavCard from './NavCard';
 
 function TabContainer(props) {

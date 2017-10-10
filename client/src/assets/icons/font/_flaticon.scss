@@ -1,0 +1,95 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 10/10/2017 13:17
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-signs:before { content: "\f100"; }
+.flaticon-round:before { content: "\f101"; }
+.flaticon-money-bag:before { content: "\f102"; }
+.flaticon-distance-1:before { content: "\f103"; }
+.flaticon-distance:before { content: "\f104"; }
+.flaticon-airplane:before { content: "\f105"; }
+.flaticon-hospital:before { content: "\f106"; }
+.flaticon-healthy:before { content: "\f107"; }
+.flaticon-mushroom:before { content: "\f108"; }
+.flaticon-bag:before { content: "\f109"; }
+.flaticon-hookah:before { content: "\f10a"; }
+.flaticon-unhealthy:before { content: "\f10b"; }
+.flaticon-funds:before { content: "\f10c"; }
+.flaticon-nature-2:before { content: "\f10d"; }
+.flaticon-medical-3:before { content: "\f10e"; }
+.flaticon-medical-2:before { content: "\f10f"; }
+.flaticon-syringe:before { content: "\f110"; }
+.flaticon-vitamins:before { content: "\f111"; }
+.flaticon-drugs-1:before { content: "\f112"; }
+.flaticon-criminal:before { content: "\f113"; }
+.flaticon-policeman:before { content: "\f114"; }
+.flaticon-gun:before { content: "\f115"; }
+.flaticon-badge:before { content: "\f116"; }
+.flaticon-nature-1:before { content: "\f117"; }
+.flaticon-nature:before { content: "\f118"; }
+.flaticon-medical-1:before { content: "\f119"; }
+.flaticon-medical:before { content: "\f11a"; }
+.flaticon-drugs:before { content: "\f11b"; }
+    
+    $font-Flaticon-signs: "\f100";
+    $font-Flaticon-round: "\f101";
+    $font-Flaticon-money-bag: "\f102";
+    $font-Flaticon-distance-1: "\f103";
+    $font-Flaticon-distance: "\f104";
+    $font-Flaticon-airplane: "\f105";
+    $font-Flaticon-hospital: "\f106";
+    $font-Flaticon-healthy: "\f107";
+    $font-Flaticon-mushroom: "\f108";
+    $font-Flaticon-bag: "\f109";
+    $font-Flaticon-hookah: "\f10a";
+    $font-Flaticon-unhealthy: "\f10b";
+    $font-Flaticon-funds: "\f10c";
+    $font-Flaticon-nature-2: "\f10d";
+    $font-Flaticon-medical-3: "\f10e";
+    $font-Flaticon-medical-2: "\f10f";
+    $font-Flaticon-syringe: "\f110";
+    $font-Flaticon-vitamins: "\f111";
+    $font-Flaticon-drugs-1: "\f112";
+    $font-Flaticon-criminal: "\f113";
+    $font-Flaticon-policeman: "\f114";
+    $font-Flaticon-gun: "\f115";
+    $font-Flaticon-badge: "\f116";
+    $font-Flaticon-nature-1: "\f117";
+    $font-Flaticon-nature: "\f118";
+    $font-Flaticon-medical-1: "\f119";
+    $font-Flaticon-medical: "\f11a";
+    $font-Flaticon-drugs: "\f11b";

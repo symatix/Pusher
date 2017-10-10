@@ -6,8 +6,9 @@ import { GridList, GridListTile } from 'material-ui/GridList';
 import {ListItem} from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
-import formatPrice from '../../utils/formatPrice'
-
+import formatPrice from '../../utils/formatPrice';
+import Icon from '../icons/Icon';
+// icons
 
 
 const styles = theme => ({
@@ -22,6 +23,10 @@ const styles = theme => ({
 		backgroundColor:'#212121',
 		cursor:'pointer',
 	    boxShadow:'0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
+	},
+	gridListIcon:{
+		padding:'0 !important',
+		textAlign:'center'
 	},
 	gridListTile:{
 		padding:'0 !important'
@@ -56,26 +61,30 @@ const DrugList = (props) => {
 
 	return (
 		<Paper className={classes.paper}>
+
 			<Card className={classes.card}>
-				<CardContent>
+				<CardContent >
 			        {props.drugs.map(d => { return (
 						<ListItem
 							key={d.name}
 							onClick={()=> handleClick(d)}
 							button>
+
 				      		<GridList
 								cellHeight={15}
 								cols={12}
 								className={classes.gridList} >
-
-								<GridListTile className={classes.gridListTile} cols={5}>
-									<Typography type="subheading" gutterBottom>{d.name}</Typography>
+								<GridListTile className={classes.gridListIcon} cols={2}>
+									<Icon id={d.name} width="19px" height="19px" />
 								</GridListTile>
 								<GridListTile className={classes.gridListTile} cols={4}>
-									<Typography type="subheading" gutterBottom>{formatPrice(d.price)}</Typography>
+									<Typography type="body1" gutterBottom>{d.name}</Typography>
 								</GridListTile>
-								<GridListTile className={classes.gridListTile} cols={3}>
-									<Typography type="subheading" gutterBottom align="right">{d.possession}</Typography>
+								<GridListTile className={classes.gridListTile} cols={4}>
+									<Typography type="body1" gutterBottom>{formatPrice(d.price)}</Typography>
+								</GridListTile>
+								<GridListTile className={classes.gridListTile} cols={2}>
+									<Typography type="body1" gutterBottom align="center">{d.possession}</Typography>
 								</GridListTile>
 				      		</GridList>
 						</ListItem>
