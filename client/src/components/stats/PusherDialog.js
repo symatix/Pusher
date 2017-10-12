@@ -3,7 +3,7 @@ import config from '../../config';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Button from 'material-ui/Button';
-import {ListItem} from 'material-ui/List';
+import { ListItem } from 'material-ui/List';
 import Slider from '@graphistry/rc-slider';
 import Radio, { RadioGroup } from 'material-ui/Radio';
 import { GridList, GridListTile } from 'material-ui/GridList';
@@ -18,62 +18,62 @@ import '@graphistry/rc-slider/assets/index.css';
 
 
 const listStyle = {
-    backgroundColor:'#212121',
-    marginTop:20,
-    boxShadow:'0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
+	backgroundColor: '#212121',
+	marginTop: 20,
+	boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
 }
 
 
 export default class NavCheckoutDialog extends React.Component {
-	constructor(props) {
-		super(props);
-        this.state = { doThis:"chill", slider:this.props.defVal }
+	constructor( props ) {
+		super( props );
+		this.state = { doThis: "chill", slider: this.props.defVal }
 
-        this.handleRadio = this.handleRadio.bind(this);
-        this.handleSlider = this.handleSlider.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.descriptionOne = this.descriptionOne.bind(this);
-        this.descriptionTwo = this.descriptionTwo.bind(this);
+		this.handleRadio = this.handleRadio.bind( this );
+		this.handleSlider = this.handleSlider.bind( this );
+		this.handleClose = this.handleClose.bind( this );
+		this.handleSubmit = this.handleSubmit.bind( this );
+		this.descriptionOne = this.descriptionOne.bind( this );
+		this.descriptionTwo = this.descriptionTwo.bind( this );
 	}
-    handleRadio(e){
-        this.setState({doThis:e.target.value})
-    }
-    handleSlider(value){
-        this.setState({slider: value})
-    }
+	handleRadio( e ) {
+		this.setState( { doThis: e.target.value } )
+	}
+	handleSlider( value ) {
+		this.setState( { slider: value } )
+	}
 	handleClose() {
-		this.props.action(null);
-		this.setState({ slider:0, doThis:"chill"})
+		this.props.action( null );
+		this.setState( { slider: 0, doThis: "chill" } )
 	}
-    handleSubmit(e){
-        let { doThis, slider } = this.state;
+	handleSubmit( e ) {
+		let { doThis, slider } = this.state;
 
-        const orders = { doThis, allocate:slider, crew:this.props.icon }
-        this.props.action(orders)
-        this.setState({ doThis:"chill" })
-    }
-    descriptionOne(){
-        const { crew } = this.props;
-        const onEnemy = crew ? `- ${crew - this.state.slider}%`: '0%';
-        const textEnemy = this.props.icon === "cops" ? 'robbery' : 'raids';
-        return `${onEnemy} ${textEnemy}`
-    }
-    descriptionTwo(){
-        const { crew } = this.props;
-        const onDrugs = crew ? `+ ${this.state.slider}%`: '0%';
-        return `${onDrugs} lucky drop`
-    }
+		const orders = { doThis, allocate: slider, crew: this.props.icon }
+		this.props.action( orders )
+		this.setState( { doThis: "chill" } )
+	}
+	descriptionOne() {
+		const { crew } = this.props;
+		const onEnemy = crew ? `- ${crew - this.state.slider}%` : '0%';
+		const textEnemy = this.props.icon === "cops" ? 'robbery' : 'raids';
+		return `${onEnemy} ${textEnemy}`
+	}
+	descriptionTwo() {
+		const { crew } = this.props;
+		const onDrugs = crew ? `+ ${this.state.slider}%` : '0%';
+		return `${onDrugs} lucky drop`
+	}
 	render() {
-        const { icon, crew, expense, defVal, text, cash } = this.props;
-        const color = crew ? teal[800] : red[900];
-        const radioCrew = icon ? icon : "cops"; // set default to cops until props arrive
-        const disableRecruit = cash < config[radioCrew].recruit ? true : false;
-        const disableDispose = (cash < config[radioCrew].dispose) || !crew ? true : false;
-        const recruitLabel = `Recruit (${formatPrice(config[radioCrew].recruit)} | daily ${formatPrice(config[radioCrew].expense)})`;
-        const disposeLabel = `Dispose (${formatPrice(config[radioCrew].dispose)})`;
+		const { icon, crew, expense, defVal, text, cash } = this.props;
+		const color = crew ? teal[ 800 ] : red[ 900 ];
+		const radioCrew = icon ? icon : "cops"; // set default to cops until props arrive
+		const disableRecruit = cash < config[ radioCrew ].recruit ? true : false;
+		const disableDispose = ( cash < config[ radioCrew ].dispose ) || !crew ? true : false;
+		const recruitLabel = `Recruit (${formatPrice(config[radioCrew].recruit)} | daily ${formatPrice(config[radioCrew].expense)})`;
+		const disposeLabel = `Dispose (${formatPrice(config[radioCrew].dispose)})`;
 		return (
-        <div>
+			<div>
             <Dialog open={this.props.open} onRequestClose={this.handleClose}>
 				<AppBar style={{minWidth:'300px'}} position="static" color="default">
 					<Tabs
@@ -156,8 +156,6 @@ export default class NavCheckoutDialog extends React.Component {
                             </GridListTile>
                         </GridList>
                     </ListItem>
-
-
                 </DialogContent>
                 <DialogActions>
                     <Button
@@ -167,9 +165,8 @@ export default class NavCheckoutDialog extends React.Component {
                         Close
                     </Button>
                 </DialogActions>
-
             </Dialog>
           </div>
-        );
+		);
 	}
 }

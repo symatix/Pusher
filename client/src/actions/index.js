@@ -3,18 +3,18 @@ import * as fn from './types'
 
 /*** authReducer ***/
 export const fetchUser = () => async dispatch => {
-	const res = await axios.get("/api/current_user");
-	dispatch({ type: fn.FETCH_USER, payload: res.data });
+	const res = await axios.get( "/api/current_user" );
+	dispatch( { type: fn.FETCH_USER, payload: res.data } );
 };
 
 /*** activeCityReducer && citiesReducer ***/
-export const calculatePrices = (drugs) => {
+export const calculatePrices = ( drugs ) => {
 	return { type: fn.CALCULATE_PRICES, payload: drugs }
 }
 
 /*** activeCityReducer && citiesReducer && moneyReducer && pusherReducer ***/
-export const changeActiveCity = (newCity, oldCity) => {
-	return { type: fn.CHANGE_CITY, payload: { newCity, oldCity }}
+export const changeActiveCity = ( newCity, oldCity ) => {
+	return { type: fn.CHANGE_CITY, payload: { newCity, oldCity } }
 }
 
 /*** activeDrugReducer ***/
@@ -34,4 +34,9 @@ export const moneyTransaction = newMoney => {
 /*** activeCityReducer && moneyReducer ***/
 export const dealWithCrew = newCrew => {
 	return { type: fn.DEAL_WITH_CREW, payload: newCrew }
+}
+
+/*** pusherReducer && moneyReducer ***/
+export const selfCare = newSelf => {
+	return { type: fn.HANDLE_SELF, payload: newSelf }
 }

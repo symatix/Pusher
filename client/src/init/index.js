@@ -10,16 +10,16 @@ export default {
 	activeCity: City0,
 	pusher: {
 		days: 1,
-		health: 100,
+		health: 75,
 		storage: 100,
 		possession: 0,
-		gun: [0, 0, 0], // damage [min, max]
+		gun: [ 0, 0, 0 ], // damage [min, max]
 		pushers: 0, // income [min, max, pushers]
 		thugs: 0, // damage [min, max, thugs]
 		payrollCops: 0, // damage [min, max, thugs]
 	},
 	money: {
-		cash: 2000000,
+		cash: 2000,
 		loaner: 5000,
 		bank: 15000,
 		deposit: 0,
