@@ -1,3 +1,3 @@
 export default (number) => {
-	return number * 100 + '%';
+	return Math.round(number * 100) + '%';
 }

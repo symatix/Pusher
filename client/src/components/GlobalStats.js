@@ -12,7 +12,7 @@ const GlobalStats = (props) => {
             <GridList
                 className={classes.gridList}
                 cellHeight="auto"
-                 align="center"
+                align="center"
                 cols={4}>
                 <GridListTile cols={4}>
                     <Icon id="funds" /> <Typography type="headline" gutterBottom>{formatPrice(cash)}</Typography>

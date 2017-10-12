@@ -5,7 +5,7 @@ import Button from 'material-ui/Button';
 import Slider from '@graphistry/rc-slider';
 import Dialog, { DialogContent } from 'material-ui/Dialog';
 import formatPrice from '../../utils/formatPrice'
-import { teal, red } from 'material-ui/colors'
+import { teal, red, grey } from 'material-ui/colors'
 import '@graphistry/rc-slider/assets/index.css';
 
 
@@ -42,9 +42,11 @@ export default class NavCheckoutDialog extends React.Component {
 		const max = this.state.pay ? firstMax : secondMax;
 		const maxTotal = this.state.pay ? total : secondMax;
 		const color = !max ? red[900] : teal[800];
+		const iconColor = !max ? red[900] : teal[400];
 		const labelColor = !max ? 'rgba(183, 28, 28, 0.2)' : 'rgba(0, 121, 107, 0.2)';
 		const button = this.state.pay ? btnText[0] : btnText[1];
 		const chipText = !max ? "Pushing too hard!" : `${formatPrice(this.state.value)} / ${formatPrice(max)} | ${formatPrice(maxTotal)}`;
+		
 		return (<div>
             <Dialog open={open} onRequestClose={this.handleClose}>
 
@@ -52,8 +54,8 @@ export default class NavCheckoutDialog extends React.Component {
 					<Tabs
 						value={this.state.action}
 						onChange={this.toggleAction}
-						indicatorColor="primary"
-						textColor="primary"
+						indicatorColor={iconColor}
+						textColor={iconColor}
 						fullWidth>
 						<Tab style={{minWidth:'100px'}} disabled label={title} />
 						<Tab style={{minWidth:'100px'}} label={btnText[0]} />
@@ -69,18 +71,19 @@ export default class NavCheckoutDialog extends React.Component {
                         min={0}
                         max={max}
                         onChange={this.handleChange}
-                        trackStyle={{backgroundColor:teal[800], height: 10}}
+                        trackStyle={{backgroundColor:grey[900], height: 3}}
                         railStyle={{
-                            backgroundColor: teal[200],
-                            height: 10}}
+                            backgroundColor: grey[500],
+                            height: 3}}
                         handleStyle={{
                           borderColor: color,
                           height: 28,
                           width: 28,
                           marginLeft: -14,
-                          marginTop: -9,
+                          marginTop: -12,
                           backgroundColor: color,
                         }}
+
                     />
                 </form>
 
@@ -98,7 +101,7 @@ export default class NavCheckoutDialog extends React.Component {
                     <Button
                         onClick={this.handleSubmit}
                         color="primary"
-                        style={{width:'30%'}}>
+                        style={{width:'30%', color:iconColor}}>
                       {button}
                     </Button>
                 </div>

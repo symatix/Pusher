@@ -6,8 +6,9 @@ import { withStyles } from 'material-ui/styles';
 import Dialog, { DialogContent } from 'material-ui/Dialog';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
+import Icon from '../icons/Icon';
 import formatPrice from '../../utils/formatPrice'
-import { teal, red } from 'material-ui/colors'
+import { teal, red, grey } from 'material-ui/colors'
 import '@graphistry/rc-slider/assets/index.css';
 
 
@@ -65,6 +66,7 @@ class DrugCheckoutDialog extends React.Component {
 		const btnText = this.state.buy ? "Buy" : "Sell";
 		const color = !max ? red[900] : teal[800];
 		const labelColor = !max ? 'rgba(183, 28, 28, 0.2)' : 'rgba(0, 121, 107, 0.2)';
+		const iconColor = !max ? red[900] : teal[400];
 
 		return (
 			<div>
@@ -74,10 +76,10 @@ class DrugCheckoutDialog extends React.Component {
 						<Tabs
 							value={this.state.action}
 							onChange={this.toggleAction}
-							indicatorColor="primary"
-							textColor="primary"
+							indicatorColor={iconColor}
+							textColor={iconColor}
 							fullWidth>
-							<Tab disabled className={classes.tabButton} label={name} />
+							<Tab disabled className={classes.tabButton} label={<Icon id={name} fill={iconColor}/>} />
 							<Tab className={classes.tabButton} label="Buy" />
 							<Tab className={classes.tabButton} disabled={!possession ? true : false} label={possession ? "Sell" : ""} />
 						</Tabs>
@@ -93,16 +95,16 @@ class DrugCheckoutDialog extends React.Component {
 	                        min={0}
 	                        max={max}
 	                        onChange={this.handleChange}
-	                        trackStyle={{backgroundColor:teal[800], height: 10}}
+	                        trackStyle={{backgroundColor:grey[900], height: 3}}
 	                        railStyle={{
-	                            backgroundColor: teal[200],
-	                            height: 10}}
+	                            backgroundColor: grey[500],
+	                            height: 3}}
 	                        handleStyle={{
 	                          borderColor: color,
 	                          height: 28,
 	                          width: 28,
 	                          marginLeft: -14,
-	                          marginTop: -9,
+	                          marginTop: -12,
 	                          backgroundColor: color,
 	                        }}
 	                    />
@@ -122,7 +124,7 @@ class DrugCheckoutDialog extends React.Component {
                     <Button
                         onClick={this.handleSubmit}
                         color="primary"
-                        style={{width:'30%'}}>
+                        style={{width:'30%', color:iconColor}}>
                       {btnText}
                     </Button>
                 </div>

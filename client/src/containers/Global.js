@@ -13,7 +13,7 @@ const styles = theme => ({
     button: {
         position:'fixed',
         bottom:5,
-        left:5,
+        right:5,
         zIndex:100,
         margin: theme.spacing.unit,
         opacity:'0.5',
@@ -105,8 +105,8 @@ function mapStateToProps({activeCity, money, pusher}){
         health:pusher.health,
         possession:pusher.possession,
         city:activeCity.name,
-        cops:activeCity.ownedCops,
-        thugs:activeCity.ownedThugs,
+        cops:activeCity.cops.owned,
+        thugs:activeCity.thugs.owned,
     }
     return props;
 }

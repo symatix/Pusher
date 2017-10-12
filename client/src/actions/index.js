@@ -30,3 +30,8 @@ export const drugTansaction = drug => {
 export const moneyTransaction = newMoney => {
 	return { type: fn.PAY_AMOUNT, payload: newMoney }
 }
+
+/*** activeCityReducer && moneyReducer ***/
+export const dealWithCrew = newCrew => {
+	return { type: fn.DEAL_WITH_CREW, payload: newCrew }
+}

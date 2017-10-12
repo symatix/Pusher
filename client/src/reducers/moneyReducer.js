@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { CHANGE_CITY, HANDLE_DRUG, PAY_AMOUNT } from '../actions/types'
+import { CHANGE_CITY, HANDLE_DRUG, PAY_AMOUNT, DEAL_WITH_CREW } from '../actions/types'
 export default function (state = {}, action) {
 
 	switch (action.type) {
@@ -18,6 +18,10 @@ export default function (state = {}, action) {
 
 	case PAY_AMOUNT:
 		return _.merge({}, state, action.payload)
+
+	case DEAL_WITH_CREW:
+		return _.merge({}, state, action.payload.money)
+
 	default:
 		return state
 	}

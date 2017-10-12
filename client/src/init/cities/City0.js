@@ -6,8 +6,16 @@ export default {
 	gangs: 0.3,
 	gangMembers: 32,
 	priceDrop: 0.2,
-	ownedCops:0,
-	ownedThugs:0,
+	cops:{
+		owned:0,
+		enemy:0,
+		drug:0
+	},
+	thugs:{
+		owned:0,
+		enemy:0,
+		drug:0
+	},
 	prices: [
 		{
 			name: 'Cocaine',

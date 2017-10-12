@@ -1,13 +1,14 @@
 import React from 'react';
 import Button from 'material-ui/Button';
 import Dialog, {DialogActions, DialogContent, DialogContentText, DialogTitle} from 'material-ui/Dialog';
+import Icon from './icons/Icon';
 import dialogStyle from '../style/dialog'
 
 const InfoDialog = (props) => {
 	return (
 		<Dialog open={props.open} onRequestClose={() => props.action()}>
 			<DialogTitle style={dialogStyle}>
-				Info - {props.heading}
+				<Icon id="info" />&emsp;{props.heading}
 			</DialogTitle>
 			<DialogContent style={{paddingTop:'15px'}}>
 				<DialogContentText>

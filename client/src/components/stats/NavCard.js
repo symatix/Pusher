@@ -15,8 +15,17 @@ function NavCard(props) {
 	return (
 		<Card className={classes.card}>
 			<CardContent>
-				{stats.map(({type, data, label, text, action}) => {
-					return <NavListItem key={label + data} type={type} primary={data} secondary={label} action={action} text={text} label={label}/>
+				{stats.map(({type, data, label, text, action, influence, icons}) => {
+					return <NavListItem
+								key={label + data}
+								type={type}
+								primary={data}
+								secondary={label}
+								action={action}
+								text={text} 
+								label={label}
+								influence={influence}
+								icons={icons}/>
 				})}
 			</CardContent>
 		</Card>
