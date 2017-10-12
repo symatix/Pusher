@@ -1,46 +1,47 @@
 import config from '../config';
 
+// will receive data from Stats component, do some calculations and generate object for the action creators
 const handlePusherDialogData = (data) => {
     const { orders, activeCity, money } = data;
-
+    // if there is no order, just return
     if (orders === null){
         return orders;
     }
     const { crew, doThis, allocate } = orders;
 
     // starting with default values - hire
-    let member = doThis === "recruit" ? 1 : 0;
-    let price = config[crew].expense;
-    let cost = config[crew].recruit;
-    let crewStrength = config[crew].enemy
+    let member  = doThis === "recruit" ? 1 : 0;
+    let price   = config[crew].expense;
+    let cost    = config[crew].recruit;
+    let crewStrength    = config[crew].enemy
     let configPriceDrop = config[crew].priceDrop;
-    // than change if kill
+    // than change if - kill
     if (doThis === "dispose"){
             member = member === 0 ? -1 : - member;
-            price = - price;
-            cost = config[crew].dispose;
-            crewStrength = - crewStrength;
+            price  = - price;
+            cost   = config[crew].dispose;
+            crewStrength    = - crewStrength;
             configPriceDrop = - configPriceDrop;
 
     }
-    
+
     // handling data for the active city reducer - default COPS
-    let affect = "gangs";
-    let priceDrop = activeCity.priceDrop + configPriceDrop;
-    const owned = activeCity[crew].owned + member;
-    const drug = allocate;
-    const enemy = owned -drug;
+    let affect      = "gangs";
+    let priceDrop   = activeCity.priceDrop + configPriceDrop;
+    const owned     = activeCity[crew].owned + member;
+    const drug      = allocate;
+    const enemy     = owned -drug;
     // handling data for money reducer (for bribe, if )
-    let expense = "bribe";
+    let expense   = "bribe";
     let dailyCost = money.bribe + price;
     let affectVal = activeCity[affect] - crewStrength;
     const cash = money.cash - cost;
 
     // change if THUGS
     if (crew === "thugs"){
-        affect = "raids";
-        expense = "salary";
-        dailyCost = money.salary + (owned * config[crew].expense);
+        affect    = "raids";
+        expense   = "salary";
+        dailyCost = money.salary + price;
         affectVal = activeCity[affect] - crewStrength;
     }
 

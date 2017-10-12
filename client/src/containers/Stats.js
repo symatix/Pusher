@@ -41,14 +41,14 @@ class Stats extends Component {
 				action:this.handleOrders
 			}
 		}
-		this.handleLocation = this.handleLocation.bind(this);
-		// functions to be passed as props to children
+		// functions to be passed as props to children - they will mostly open/close dialogs
 		this.passForbidDialog = this.passForbidDialog.bind(this);
 		this.passTravelDialog = this.passTravelDialog.bind(this);
 		this.passInfoDialog = this.passInfoDialog.bind(this);
 		this.passTransferDialog = this.passTransferDialog.bind(this);
 		this.passPusherDialog = this.passPusherDialog.bind(this);
-		// functions that handle redux state
+		// functions that handle redux state - doing some calculations and generating objects for action creators
+		this.handleLocation = this.handleLocation.bind(this);
 		this.handleMoney = this.handleMoney.bind(this);
 		this.handleOrders = this.handleOrders.bind(this);
 	}
@@ -58,7 +58,7 @@ class Stats extends Component {
 	passForbidDialog() {
 		this.setState({ forbidDialog: false });
 	}
-	// set state for info dialogs, values are passed from NavListItem
+	// set state for info dialogs, values are returned from NavListItem (onClick)
 	passInfoDialog(text, label) {
 		const heading = label ? label[0].toUpperCase() + label.substring(1).toLowerCase() : '';
 		this.setState({
@@ -69,7 +69,10 @@ class Stats extends Component {
 			}
 		})
 	}
+	// passing down state as props to PusherDialog
 	passPusherDialog(decision){
+		// decision will return string - "cops" || "thugs"
+		// hande case where decision was done, in that case, activate forbid dialog
 		if (decision === "cops" && !this.state.pusherDialogActiveCops){
 			this.setState({forbidDialog: true})
 			return null;
@@ -78,80 +81,76 @@ class Stats extends Component {
 			this.setState({forbidDialog: true})
 			return null;
 		}
-		if(decision === "thugs"){
-			const { thugs } = this.props.activeCity;
 
-			this.setState({
-				pusherData:{
-					crew:thugs.owned,
-					text:["Harass The Cops", "Flood The Market"],
-					icon:"thugs",
-					expense:thugs.owned * config.thugs.expense,
-					defVal:thugs.drug,
-				},
-				pusherDialog: true
-			})
-		}
-		if(decision === "cops"){
-			const { cops } = this.props.activeCity;
-			this.setState({
-				pusherData:{
-					crew:cops.owned,
-					text:["Arrest Thugs", "Raid The Narket"],
-					icon:"cops",
-					expense:cops.owned * config.cops.expense,
-					defVal:cops.drug,
-				},
-				pusherDialog: true
-			})
+		const { activeCity } = this.props;
+		const text = decision === "cops" ? ["Arrest Thugs", "Raid The Narket"] : ["Harass The Cops", "Flood The Market"];
+
+		this.setState({
+			pusherData:{
+				crew:activeCity[decision].owned,
+				text:text,
+				icon:decision,
+				expense:activeCity[decision].owned * config[decision].expense,
+				defVal:activeCity[decision].drug,
+				action:this.handleOrders
+			},
+			pusherDialog: true
+		})
+	}
+	passTransferDialog(decision) { // string - "loaner" || "bank" || "deposit" - used for setting state for checkout dialog
+		const {cash, bank, deposit, loaner, days} = this.props.money;
+
+		switch(decision){
+			case "loaner":
+				this.setState({
+					transferData: {
+						title: decision[0].toUpperCase() + decision.substring(1),
+						firstMax: loaner > cash ? cash : loaner,
+						secondMax: 0,
+						total: loaner,
+						btnText: ["Pay"],
+						cash: this.props.cash,
+						action: this.handleMoney
+					},
+					transferDialog: true
+				})
+				break;
+
+			case "bank":
+				this.setState({
+					transferData: {
+						title: decision[0].toUpperCase() + decision.substring(1),
+						firstMax: bank > cash ? cash : bank,
+						secondMax: days < 30 ? days * 200 : 1000000, // maximum amount to borrow from bank
+						total: bank,
+						btnText: ["Pay", "Borrow"],
+						cash: this.props.cash,
+						action: this.handleMoney
+					},
+					transferDialog: true
+				})
+				break;
+
+			case "deposit":
+				this.setState({
+					transferData: {
+						title: decision[0].toUpperCase() + decision.substring(1),
+						firstMax: cash,
+						secondMax: deposit,
+						total: cash,
+						btnText: ["Deposit", "Withdraw"],
+						action: this.handleMoney
+					},
+					transferDialog: true
+				})
+				break;
+
+			default:
+				this.setState({transferDialog:false})
 		}
 	}
-	passTransferDialog(decision) {
-		const {cash, bank, deposit, loaner} = this.props.money;
-		if (decision === "loaner") {
-			this.setState({
-				transferData: {
-					title: decision[0].toUpperCase() + decision.substring(1),
-					firstMax: loaner > cash ? cash : loaner,
-					secondMax: 0,
-					total: loaner,
-					btnText: ["Pay"],
-					cash: this.props.cash,
-					action: this.handleMoney
-				},
-				transferDialog: true
-			})
-		}
-		if (decision === "bank") {
-			const { days } = this.props.pusher;
-			this.setState({
-				transferData: {
-					title: decision[0].toUpperCase() + decision.substring(1),
-					firstMax: bank > cash ? cash : bank,
-					secondMax: days < 30 ? days * 200 : 1000000, // maximum amount to borrow from bank
-					total: bank,
-					btnText: ["Pay", "Borrow"],
-					cash: this.props.cash,
-					action: this.handleMoney
-				},
-				transferDialog: true
-			})
-		}
-		if (decision === "deposit") {
-			this.setState({
-				transferData: {
-					title: decision[0].toUpperCase() + decision.substring(1),
-					firstMax: cash,
-					secondMax: deposit,
-					total: cash,
-					btnText: ["Deposit", "Withdraw"],
-					action: this.handleMoney
-				},
-				transferDialog: true
-			})
-		}
-	}
-	handleLocation(name) {
+	// handles change of location
+	handleLocation(name) { // receives a string with the name of the future activeCity
 		if (!name) {
 			this.setState({
 				travelDialog: !this.state.travelDialog
@@ -162,7 +161,7 @@ class Stats extends Component {
 		this.props.changeActiveCity(newCity, this.props.activeCity);
 		this.setState({travelDialog: false, pusherDialogActiveThugs:true, pusherDialogActiveCops:true})
 	}
-	handleMoney(state, storeLocation, pay) {
+	handleMoney(state, storeLocation, pay) { // state - new value (number), storeLocation - key name in money object, pay - boolean
 		if (!state) {
 			this.setState({transferDialog: false});
 			return;
@@ -177,12 +176,11 @@ class Stats extends Component {
 		this.props.moneyTransaction(newState)
 		this.setState({transferDialog: false})
 	}
-	handleOrders(orders){
-		const { activeCity, money } = this.props;
+	handleOrders(orders){ // object - {crew:cops || thugs, allocate:how many will go to priceDrop, doThis:recruit || dispose}
+		if (orders !== null){
+			const { activeCity, money } = this.props;
+			const newStats = handlePusherDialogData({orders, activeCity, money})
 
-		const newStats = handlePusherDialogData({orders, activeCity, money})
-
-		if (newStats !== null){
 			this.props.dealWithCrew(newStats);
 			orders.crew === "thugs" ? this.setState({pusherDialogActiveThugs:false}) : this.setState({pusherDialogActiveCops:false});
 		}
@@ -191,6 +189,8 @@ class Stats extends Component {
 	render() {
 		const {activeCity, money, pusher} = this.props;
 		const cityList = this.props.cities.map(({name}) => name);
+
+		// now bind all functions that are used for dialog state (show/hide)
 		const actions = {
 			travel: this.passTravelDialog,
 			info: this.passInfoDialog,
@@ -199,13 +199,13 @@ class Stats extends Component {
 		}
 		// generate all the items in the list, their callbacks and text
 		const stats = generateStats({activeCity, money, pusher, actions});
-		console.log(stats)
+
 		return (
 			<div>
 				<Nav stats={stats}/>
 				<TravelDialog open={this.state.travelDialog} handleLocation={this.handleLocation} cityList={cityList} activeCity={this.props.activeCity.name}/>
 				<NavCheckoutDialog open={this.state.transferDialog} {...this.state.transferData}/>
-				<PusherDialog open={this.state.pusherDialog} action={this.handleOrders} {...this.state.pusherData} cash={money.cash}/>
+				<PusherDialog open={this.state.pusherDialog} {...this.state.pusherData} cash={money.cash}/>
 				<InfoDialog open={this.state.infoDialog} text={this.state.infoData.text} heading={this.state.infoData.heading} action={this.passInfoDialog}/>
 				<ForbidDialog open={this.state.forbidDialog} text="Feeling bossy today?" title="Bad Boss" action={this.passForbidDialog} />
 			</div>
