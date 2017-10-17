@@ -1,20 +1,19 @@
 export default {
 	name: 'Split',
 	status: 'shop',
-	raids: 0.35,
-	cityCops: 36,
-	gangs: 0.3,
-	gangMembers: 32,
-	priceDrop: 0.2,
-	cops:{
-		owned:0,
-		enemy:0,
-		drug:0
+	busts: 0.4,
+	robbery: 0.25,
+	luckyDrop: 0.2,
+	wickedRaid: 0.3,
+	cops: {
+		owned: 0,
+		enemy: 0,
+		drug: 0
 	},
-	thugs:{
-		owned:0,
-		enemy:0,
-		drug:0
+	thugs: {
+		owned: 0,
+		enemy: 0,
+		drug: 0
 	},
 	prices: [
 		{

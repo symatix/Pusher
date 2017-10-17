@@ -1,20 +1,19 @@
 export default {
 	name: 'Dubrovnik',
 	status: 'bank',
-	raids: 0.1,
-	cityCops: 17,
-	gangs: 0.1,
-	gangMembers: 15,
-	priceDrop: 0.4,
-	cops:{
-		owned:0,
-		enemy:0,
-		drug:0
+	busts: 0.4,
+	robbery: 0.25,
+	luckyDrop: 0.2,
+	wickedRaid: 0.3,
+	cops: {
+		owned: 0,
+		enemy: 0,
+		drug: 0
 	},
-	thugs:{
-		owned:0,
-		enemy:0,
-		drug:0
+	thugs: {
+		owned: 0,
+		enemy: 0,
+		drug: 0
 	},
 	prices: [
 		{

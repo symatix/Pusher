@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DrugList from '../components/drugs/DrugList';
 import DrugCheckoutDialog from '../components/drugs/DrugCheckoutDialog';
-import * as actions from '../actions';
+import { setActiveDrug, drugTansaction, calculatePrices } from '../actions';
 import '../utils/scrollToTop'
 
 class Drugs extends Component {
@@ -21,15 +21,15 @@ class Drugs extends Component {
 		}
 	}
 	// set up an event listener for scrollToTop - DrugList component
-	componentDidMount(){
-		document.querySelector('#toTop').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.scroll({
-                top: 0,
-                left: 0,
-                behavior: 'smooth'
-            });
-        });
+	componentDidMount() {
+		document.querySelector('#toTop').addEventListener('click', function (e) {
+			e.preventDefault();
+			window.scroll({
+				top: 0,
+				left: 0,
+				behavior: 'smooth'
+			});
+		});
 	}
 
 	// injects drug inside activeDrug reducer and activates buy/sell dialog
@@ -82,7 +82,7 @@ class Drugs extends Component {
 	}
 }
 
-function mapStateToProps(store) {
-	return { ...store }
+function mapStateToProps({ pusher, money, drugs, activeDrug, activeCity }) {
+	return { pusher, money, drugs, activeDrug, activeCity }
 }
-export default connect(mapStateToProps, actions)(Drugs);
+export default connect(mapStateToProps, { setActiveDrug, drugTansaction, calculatePrices })(Drugs);

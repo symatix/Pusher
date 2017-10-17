@@ -1,20 +1,19 @@
 export default {
 	name: 'Zagreb',
 	status: 'loaner',
-	raids: 0.4,
-	cityCops: 27,
-	gangs: 0.25,
-	gangMembers: '45',
-	priceDrop: 0.1,
-	cops:{
-		owned:0,
-		enemy:0,
-		drug:0
+	busts: 0.4,
+	robbery: 0.25,
+	luckyDrop: 0.2,
+	wickedRaid: 0.3,
+	cops: {
+		owned: 0,
+		enemy: 0,
+		drug: 0
 	},
-	thugs:{
-		owned:0,
-		enemy:0,
-		drug:0
+	thugs: {
+		owned: 0,
+		enemy: 0,
+		drug: 0
 	},
 	prices: [
 		{

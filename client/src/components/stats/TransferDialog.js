@@ -4,23 +4,25 @@ import Tabs, { Tab } from 'material-ui/Tabs';
 import Button from 'material-ui/Button';
 import Slider from '@graphistry/rc-slider';
 import Dialog, { DialogContent } from 'material-ui/Dialog';
+import Typography from 'material-ui/Typography';
+import Icon from '../icons/Icon';
 import formatPrice from '../../utils/formatPrice'
 import { teal, red, grey } from 'material-ui/colors'
 import '@graphistry/rc-slider/assets/index.css';
 
 
-export default class NavCheckoutDialog extends React.Component {
+export default class TransferDialog extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { pay: true, value: 0, action:1 }
+		this.state = { pay: true, value: 0, action: 1 }
 		this.toggleAction = this.toggleAction.bind(this)
 		this.handleChange = this.handleChange.bind(this)
 		this.handleClose = this.handleClose.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
 	}
 	toggleAction(e, action) {
-		if (this.props.btnText[1]){
-			this.setState({ pay: !this.state.pay, action  })
+		if (this.props.btnText[1]) {
+			this.setState({ pay: !this.state.pay, action })
 		}
 	}
 	handleChange(value) {
@@ -31,14 +33,17 @@ export default class NavCheckoutDialog extends React.Component {
 		this.setState({ value: 0, pay: true, action: 1 })
 	}
 	handleSubmit() {
-		const stateChange = this.props.title.toLowerCase();
+		// namespace cluttered with dept, so bankDept is initialy sent
+		//have to convert to dept to trigger the transfer
+		const { iconId } = this.props;
+		const toWho = iconId === 'bankDept' ? 'bank' : iconId;
 
 		// 3 variables, first the value, than the key in store and after that does it add or substract money
-		this.props.action(this.state.value, stateChange, this.state.pay);
+		this.props.action(toWho, this.state.value, this.state.pay);
 		this.setState({ action: 1, value: 0, pay: true })
 	}
 	render() {
-		const { title, firstMax, secondMax, total, btnText, open } = this.props;
+		const { iconId, firstMax, secondMax, total, btnText, open, description } = this.props;
 		const max = this.state.pay ? firstMax : secondMax;
 		const maxTotal = this.state.pay ? total : secondMax;
 		const color = !max ? red[900] : teal[800];
@@ -46,7 +51,7 @@ export default class NavCheckoutDialog extends React.Component {
 		const labelColor = !max ? 'rgba(183, 28, 28, 0.2)' : 'rgba(0, 121, 107, 0.2)';
 		const button = this.state.pay ? btnText[0] : btnText[1];
 		const chipText = !max ? "Pushing too hard!" : `${formatPrice(this.state.value)} / ${formatPrice(max)} | ${formatPrice(maxTotal)}`;
-		
+
 		return (<div>
             <Dialog open={open} onRequestClose={this.handleClose}>
 
@@ -57,12 +62,12 @@ export default class NavCheckoutDialog extends React.Component {
 						indicatorColor={iconColor}
 						textColor={iconColor}
 						fullWidth>
-						<Tab style={{minWidth:'100px'}} disabled label={title} />
+						<Tab style={{minWidth:'100px'}} disabled label={<Icon id={iconId} fill={iconColor}/>}/>
 						<Tab style={{minWidth:'100px'}} label={btnText[0]} />
 						<Tab style={{minWidth:'100px'}} disabled={!btnText[1] ? true : false} label={ btnText[1] ? btnText[1] : ""} />
 					</Tabs>
 				</AppBar>
-              <DialogContent>
+              <DialogContent style={{textAlign:'center'}}>
                     <form
                         style={{padding:'25px 15px 5px 15px'}}
                         onSubmit={this.handleSubmit}>
@@ -86,8 +91,12 @@ export default class NavCheckoutDialog extends React.Component {
 
                     />
                 </form>
-
+				<Typography type="body1" style={{margin:"0 auto"}}>
+					{description}
+				</Typography>
                 </DialogContent>
+
+
                 <div style={{
               		display: 'flex',
               		flexWrap: 'nowrap',

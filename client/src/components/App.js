@@ -1,6 +1,7 @@
 // logic
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
+import { connect } from 'react-redux';
 // style components
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
@@ -12,6 +13,9 @@ import muiTheme from '../style/colors';
 import Login from './Login';
 import NewGame from '../containers/NewGame';
 import Layout from './Layout';
+
+// action
+import { fetchUser } from '../actions';
 //typography
 import 'typeface-roboto'
 // NOTE: REMOVE BOOTSTRAP FROM MODULES
@@ -19,7 +23,7 @@ import 'typeface-roboto'
 
 const styles = theme => ({
 	root: {
-		width:'100%',
+		width: '100%',
 		flexGrow: 1,
 		marginTop: 30,
 	},
@@ -29,8 +33,11 @@ const styles = theme => ({
 });
 
 class App extends Component {
+	componentDidMount() {
+		this.props.fetchUser();
+	}
 	render() {
-		const classes = this.props.classes;
+		const { auth, classes } = this.props;
 		return (
 			<MuiThemeProvider theme={muiTheme}>
 				<Grid container className={classes.root}>
@@ -39,7 +46,7 @@ class App extends Component {
 							<div>
 		                        <Route exact path="/" component={Login} />
 								<Route exact path="/new" component={NewGame} />
-								<Route exact path="/on" component={Layout} />
+								<Route exact path="/on" component={auth ? Layout : Login} />
 							</div>
 		                </BrowserRouter>
 					</Grid>
@@ -52,4 +59,8 @@ class App extends Component {
 App.propTypes = {
 	classes: PropTypes.object.isRequired,
 };
-export default withStyles(styles)(App);
+
+function mapStateToProps({ auth }) {
+	return { auth }
+}
+export default connect(mapStateToProps, { fetchUser })(withStyles(styles)(App));
