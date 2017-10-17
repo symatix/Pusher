@@ -38,8 +38,8 @@ export default (about, state) => {
 		return crewTotal(
 			activeCity.cops.owned,
 			activeCity.thugs.owned,
-			pusher.thugs,
-			pusher.cops
+			pusher.cops,
+			pusher.thugs
 		)
 
 	case "cash":
@@ -61,10 +61,10 @@ export default (about, state) => {
 		return storageFn(storage, cash, pusher.storage, action);
 
 	case "cops":
-		return copsFn(activeCity.cops, crew.cops, action);
+		return copsFn(activeCity, crew.cops, pusher, money, action);
 
 	case "thugs":
-		return thugsFn(activeCity.thugs, crew.thugs, action);
+		return thugsFn(activeCity, crew.thugs, pusher, money, action);
 
 	default:
 		return null;

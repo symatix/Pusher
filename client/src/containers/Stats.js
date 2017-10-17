@@ -97,7 +97,7 @@ class Stats extends Component {
 			break;
 
 		case "crew":
-			console.log(action, data)
+			this.props.dealWithCrew(data)
 			break;
 
 		default:

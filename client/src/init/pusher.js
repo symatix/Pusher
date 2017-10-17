@@ -6,4 +6,6 @@ export default {
 	gun: [0, 0], // damage [min, max]
 	thugs: 0, // damage [min, max, thugs]
 	cops: 0, // damage [min, max, thugs]
+	didCops: false, // switch to true if action with cops
+	didThugs: false // switch to true if action with thugs
 }

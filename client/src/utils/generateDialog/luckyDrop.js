@@ -9,12 +9,12 @@ const luckyDrop = (stats, conf) => {
 			{
 				icon: 'city',
 				sub: 'City',
-				stats: formatPercentage(stats.luckyDrop),
+				stats: formatPercentage(stats.default.luckyDrop),
 			},
 			{
 				icon: 'thugs',
 				sub: 'Thugs',
-				stats: formatPercentage(stats.thugs.owned),
+				stats: formatPercentage(stats.thugs.owned * conf),
 			},
 		],
 		description: `Get your thugs to start pushing!

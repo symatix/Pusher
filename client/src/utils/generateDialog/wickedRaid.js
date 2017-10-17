@@ -9,12 +9,12 @@ const wickedRaid = (stats, conf) => {
 			{
 				icon: 'city',
 				sub: 'City',
-				stats: formatPercentage(stats.wickedRaid),
+				stats: formatPercentage(stats.default.wickedRaid),
 			},
 			{
 				icon: 'cops',
 				sub: 'Cops',
-				stats: formatPercentage(stats.cops.owned),
+				stats: formatPercentage(stats.cops.owned * conf),
 			},
 		],
 		description: `Send cops to do some actual work!

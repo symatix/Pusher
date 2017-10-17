@@ -1,5 +1,5 @@
 export default {
-	cash: 5000,
+	cash: 50000000,
 	loaner: 5000,
 	bank: 15000,
 	deposit: 0,

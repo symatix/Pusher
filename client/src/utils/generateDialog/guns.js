@@ -15,7 +15,7 @@ const gunsFn = (guns, cash, ownedGun, action) => {
 					guns: { type: guns[0].type, owned: true },
 					pusher: { gun: ownedGun[0] > guns[0].damage[0] ? ownedGun : guns[0].damage }
 				}),
-				alert: guns[0].owned || cash < guns[0].cost
+				alert: guns[0].owned || cash < guns[0].cost || ownedGun[0] > guns[0].damage[0]
 			},
 			{ // gun
 				icon: `${guns[1].type}`,
@@ -27,7 +27,7 @@ const gunsFn = (guns, cash, ownedGun, action) => {
 					guns: { type: guns[1].type, owned: true },
 					pusher: { gun: ownedGun[0] > guns[1].damage[0] ? ownedGun : guns[1].damage }
 				}),
-				alert: guns[1].owned || cash < guns[1].cost
+				alert: guns[1].owned || cash < guns[1].cost || ownedGun[0] > guns[1].damage[0]
 			},
 			{ // rifle
 				icon: `${guns[2].type}`,
@@ -39,7 +39,7 @@ const gunsFn = (guns, cash, ownedGun, action) => {
 					guns: { type: guns[2].type, owned: true },
 					pusher: { gun: ownedGun[0] > guns[2].damage[0] ? ownedGun : guns[2].damage }
 				}),
-				alert: guns[2].owned || cash < guns[2].cost
+				alert: guns[2].owned || cash < guns[2].cost || ownedGun[0] > guns[2].damage[0]
 			},
 			{ // sniper
 				icon: `${guns[3].type}`,
