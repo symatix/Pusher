@@ -9,12 +9,12 @@ const busts = (stats, conf) => {
 			{
 				icon: 'city',
 				sub: 'City',
-				stats: formatPercentage(stats.busts),
+				stats: formatPercentage(stats.default.busts),
 			},
 			{
 				icon: 'thugs',
 				sub: 'Thugs',
-				stats: formatPercentage(stats.thugs.enemy),
+				stats: formatPercentage(stats.thugs.enemy * conf),
 			},
 		],
 		description: `Send some thugs to harras the cops!

@@ -49,8 +49,19 @@ const copsFn = (activeCity, conf, pusher, money, action) => {
 					pusher: { cops: pusher.cops - 1, didCops: true },
 				}),
 				alert: money.cash < conf.dispose || pusher.didCops === true
-				}
-			]
+			}
+		],
+		slider: {
+			crew: 'cops',
+			actionOne: "Robbery",
+			actionTwo: "Raids",
+			defVal: cops.drug,
+			altVal: cops.enemy,
+			maxVal: cops.owned,
+			city: activeCity.default,
+			conf,
+			action,
+		}
 	}
 }
 export default copsFn;

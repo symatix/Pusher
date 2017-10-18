@@ -9,12 +9,12 @@ const robbery = (stats, conf) => {
 			{
 				icon: 'city',
 				sub: 'City',
-				stats: formatPercentage(stats.robbery),
+				stats: formatPercentage(stats.default.robbery),
 			},
 			{
 				icon: 'cops',
 				sub: 'Cops',
-				stats: formatPercentage(stats.cops.enemy),
+				stats: formatPercentage(stats.cops.enemy * conf),
 			},
 		],
 		description: `Send the word to clear the streets!

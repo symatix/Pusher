@@ -9,11 +9,12 @@ import DialogTitle from './DialogTitle';
 import DialogItem from './DialogItem';
 import DialogFooter from './DialogFooter';
 import { GridList, GridListTile } from 'material-ui/GridList';
+import CrewSlider from '../CrewSlider';
 
 const width = { width: 400 };
 
 const DialogMain = props => {
-	const { open, close, iconLabel, label, content, description } = props;
+	const { open, close, slider, iconLabel, label, content, description } = props;
 	return (
 		<Dialog open={open} onRequestClose={()=>close(null)}>
             <DialogTitle
@@ -41,6 +42,10 @@ const DialogMain = props => {
 					)
 				})}
             </GridList>
+			{slider
+			? <CrewSlider data={slider}/>
+			: ""
+			}
 			{description
 			? <DialogFooter description={description} width={width}/>
 			: ""
