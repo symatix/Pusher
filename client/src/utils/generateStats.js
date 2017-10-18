@@ -9,10 +9,10 @@ export default (stats) => {
 	let { days, health, possession, storage, gun } = stats.pusher;
 	let crewTotal;
 
-	luckyDrop = formatPercentage(luckyDrop);
-	wickedRaid = formatPercentage(wickedRaid);
-	busts = formatPercentage(busts);
-	robbery = formatPercentage(robbery);
+	luckyDrop = luckyDrop !== stats.activeCity.default.luckyDrop ? `${formatPercentage(luckyDrop)} [ thugs ]` : formatPercentage(luckyDrop);
+	wickedRaid = wickedRaid !== stats.activeCity.default.wickedRaid ? `${formatPercentage(wickedRaid)} [ cops ]` : formatPercentage(wickedRaid);
+	busts = busts !== stats.activeCity.default.busts ? `${formatPercentage(busts)} [ thugs ]` : formatPercentage(busts);
+	robbery = robbery !== stats.activeCity.default.robbery ? `${formatPercentage(robbery)} [ cops ]` : formatPercentage(robbery);
 	crewTotal = (thugs.owned + cops.owned).toString();
 
 	cash = formatPrice(stats.money.cash);
@@ -25,7 +25,7 @@ export default (stats) => {
 	// create an object that has all the data and send it for rendering the NAV interface
 	return {
 		city: [
-			{ type: "travel", data: name, label: "CITY", action: actions.travel, influence: "" },
+			{ type: "travel", data: name, label: "TRAVEL", action: actions.travel, influence: "" },
 			{ type: "luckyDrop", data: luckyDrop, label: "LUCKY DROP", action: actions.dialog, influence: "" },
 			{ type: "wickedRaid", data: wickedRaid, label: "WICKED RAID", action: actions.dialog, influence: "" },
 			{ type: "busts", data: busts, label: "BUSTS", action: actions.dialog, influence: "" },
